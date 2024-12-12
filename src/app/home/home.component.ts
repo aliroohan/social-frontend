@@ -19,7 +19,7 @@ class post {
     this.content = content;
   }
 }
-const apiAddress = 'http://social-delta-nine.vercel.app';
+const apiAddress = 'https://social-delta-nine.vercel.app';
 class user {
   id!: number;
   name!: string;
