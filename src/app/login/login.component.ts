@@ -15,7 +15,7 @@ interface User {
   email: string;
   password: string;
 }
-const apiAddress = 'http://social-delta-nine.vercel.app';
+const apiAddress = 'https://social-delta-nine.vercel.app';
 
 @Component({
   selector: 'app-login',
