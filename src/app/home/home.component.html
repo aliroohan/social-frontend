@@ -1,0 +1,35 @@
+<div class="homepage-container">
+  <div class="navbar">
+    <h1>MySocial</h1>
+    <p>{{ name }}</p>
+  </div>
+
+  <div class="content">
+    <div class="sidebar">
+      <ul>
+        <li (click)="homeBtn()">Home</li>
+        <li (click)="Post()">Create Post</li>
+        <li>Settings</li>
+      </ul>
+    </div>
+
+    
+      <div *ngIf="!post" class="feed">
+        <div *ngFor="let post of posts" class="post">
+          <h3>{{ post.user_name }}</h3>
+          <p>{{ post.content }}</p>
+        </div>
+      </div>
+    
+
+    <div *ngIf="post" class="feed">
+      <mat-form-field class="post-text">
+        <mat-label>Post Content</mat-label>
+        <textarea matInput [(ngModel)]="postContent"></textarea>
+      </mat-form-field>
+      <button class="post-btn" (click)="createPost()">Post</button>
+    </div>
+
+    <div class="right-sidebar"></div>
+  </div>
+</div>

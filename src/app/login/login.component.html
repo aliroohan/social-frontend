@@ -1,0 +1,43 @@
+<div class="container">
+    <mat-card>
+      <mat-card-title>{{ isLogin ? "Login" : "Sign Up" }}</mat-card-title>
+      <mat-card-content>
+        <form (ngSubmit)="isLogin ? onLogin() : onSignup()">
+          <div class="form">
+            
+              <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="name" name="name" required />
+              </mat-form-field>
+              <div *ngIf="!isLogin">
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="email" name="email" required />
+            </mat-form-field>
+          </div>
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                [(ngModel)]="password"
+                name="password"
+                type="password"
+                required
+              />
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">
+              {{ isLogin ? "Login" : "Sign Up" }}
+            </button>
+          </div>
+        </form>
+  
+        <button mat-button (click)="toggleForm()">
+          {{ isLogin ? "Create an account" : "Already have an account?" }}
+        </button>
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

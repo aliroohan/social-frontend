@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin-top: 20px;
+  background-color: #3b5998;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.error-message {
+  color: red; /* Change color as needed */
+  margin-top: 10px;
+}
+mat-card {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
