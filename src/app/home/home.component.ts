@@ -116,7 +116,7 @@ export class HomeComponent {
   createPost() {
     this.http
       .post(
-        'http://127.0.0.1:8000/posts/?user_id=' +
+        apiAddress + '/posts/?user_id=' +
           this.login.user_id +
           '&content=' +
           this.postContent,
