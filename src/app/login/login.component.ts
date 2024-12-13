@@ -16,6 +16,7 @@ interface User {
   password: string;
 }
 const apiAddress = 'https://social-delta-nine.vercel.app';
+const localApi  = 'http://127.0.0.1:8000';
 
 @Component({
   selector: 'app-login',
@@ -82,7 +83,10 @@ export class LoginComponent {
       password: this.password,
     };
     console.log('Signing up with', signupData);
-
+    if (this.name === '' || this.email === '' || this.password === '') {
+      this.errorMessage = 'All is required';
+      return;
+    }
     this.http
       .post(
         apiAddress + '/users/?name=' +
@@ -96,7 +100,7 @@ export class LoginComponent {
       .subscribe(
         (response) => {
           console.log('Signup successful', response);
-          // Handle successful signup (e.g., navigate to login or show a success message)
+          
         },
         (error) => {
           if (error.status === 400) {
