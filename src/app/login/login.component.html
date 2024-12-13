@@ -36,7 +36,7 @@
       <button type="submit" class="btn">{{ isLogin ? "Login" : "Sign Up" }}</button>
 
       <div class="register-link">
-        <p>Don't Have Account <b (click)="toggleForm()">Register</b></p>
+        <p>{{ isLogin ? "Don't Have Account" : "Already have an account" }} <b (click)="toggleForm()">{{ isLogin ? "Register" : "Login" }}</b></p>
       </div>
     </form>
     <div *ngIf="errorMessage" class="error-message">
