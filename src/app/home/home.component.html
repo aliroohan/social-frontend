@@ -9,12 +9,12 @@
       <ul>
         <li (click)="homeBtn()">Home</li>
         <li (click)="Post()">Create Post</li>
-        <li>Settings</li>
+        <li (click)="friendsBtn()">Friends</li>
       </ul>
     </div>
 
     
-      <div *ngIf="!post" class="feed">
+      <div *ngIf="postdiv" class="feed">
         <div *ngFor="let post of posts" class="post">
           <h3>{{ post.user_name }}</h3>
           <p>{{ post.content }}</p>
@@ -22,12 +22,22 @@
       </div>
     
 
-    <div *ngIf="post" class="feed">
+    <div *ngIf="createPosts" class="feed">
       <mat-form-field class="post-text">
         <mat-label>Post Content</mat-label>
         <textarea matInput [(ngModel)]="postContent"></textarea>
       </mat-form-field>
       <button class="post-btn" (click)="createPost()">Post</button>
+    </div>
+
+    <div *ngIf="displayFriends" class="feed">
+        <div class="friend">
+            <h3>Friends</h3>
+            <div *ngFor="let friend of friends" class="friend-card">
+                <h4>{{ friend.name }}</h4>
+                <button (click)="removeFriend(friend.id)" >Remove Friend</button>
+            </div>
+        </div>
     </div>
 
     <div class="right-sidebar"></div>

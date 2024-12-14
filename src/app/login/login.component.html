@@ -1,4 +1,12 @@
 <div class="body">
+  <div class="welcome">
+    <div id="loop">
+      <h1>
+        <b>WELCOME </b><b><i> TO</i></b> <span> CONNEVO </span>&nbsp;&nbsp;
+      </h1>
+    </div>
+  </div>
+
   <div class="wrapper">
     <form (ngSubmit)="isLogin ? onLogin() : onSignup()">
       <h1>{{ isLogin ? "Login" : "Sign Up" }}</h1>
@@ -13,7 +21,13 @@
         <i class="bx bxs-user"></i>
       </div>
       <div class="input-box" *ngIf="!isLogin">
-        <input type="text" placeholder="email" [(ngModel)]="email" name="email" required />
+        <input
+          type="text"
+          placeholder="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
         <i class="bx bxs-envelope"></i>
       </div>
       <div class="input-box">
@@ -28,10 +42,15 @@
         <i class="bx bxs-lock-alt"></i>
       </div>
 
-      <button type="submit" class="btn">{{ isLogin ? "Login" : "Sign Up" }}</button>
+      <button type="submit" class="btn">
+        {{ isLogin ? "Login" : "Sign Up" }}
+      </button>
 
       <div class="register-link">
-        <p>{{ isLogin ? "Don't Have Account" : "Already have an account" }} <b (click)="toggleForm()">{{ isLogin ? "Register" : "Login" }}</b></p>
+        <p>
+          {{ isLogin ? "Don't Have Account" : "Already have an account" }}
+          <b (click)="toggleForm()">{{ isLogin ? "Register" : "Login" }}</b>
+        </p>
       </div>
     </form>
     <div *ngIf="errorMessage" class="error-message">

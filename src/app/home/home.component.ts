@@ -44,7 +44,9 @@ class user {
 export class HomeComponent {
   name: string = '';
   postContent: string = '';
-  post: boolean = false;
+  postdiv: boolean = true;
+  displayFriends: boolean = false;
+  createPosts: boolean = false;
   posts: post[] = [];
   friends: user[] = [];
   
@@ -54,6 +56,10 @@ export class HomeComponent {
     private http: HttpClient,
     private router: Router
   ) {
+
+    if (this.login.user_id == 0 || this.login.user_name == '') {
+      this.router.navigate(['/login']);
+    }
     this.name = login.user_name;
     this.http
       .get<user[]>(apiAddress +'/friends/' + this.login.user_id)
@@ -103,9 +109,7 @@ export class HomeComponent {
     console.log(this.posts);
   }
 
-  Post() {
-    this.post = !this.post;
-  }
+  
 
   ngOnInit() {
     if (this.login.user_id == 0) {
@@ -139,7 +143,38 @@ export class HomeComponent {
       );
   }
 
+  removeFriend(id: number) {
+    this.http
+      .delete(apiAddress + '/friend/' + this.login.user_id + '/' + id)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          alert('Friend removed successfully');
+          this.friends = this.friends.filter((friend) => friend.id != id);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+  }
+
+  Post() {
+    this.postdiv = false;
+    this.displayFriends = false;
+    this.createPosts = true;
+  }
+
+  friendsBtn() {
+    this.postdiv = false;
+    this.displayFriends = true;
+    this.createPosts = false;
+
+  }
+
   homeBtn() {
-    console.log('Home button clicked');
+    this.postdiv = true;
+    this.displayFriends = false;
+    this.createPosts = false;
   }
 }

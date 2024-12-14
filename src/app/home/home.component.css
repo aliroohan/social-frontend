@@ -96,3 +96,12 @@
 .right-sidebar ul li {
   margin-bottom: 10px;
 }
+
+.friend-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
