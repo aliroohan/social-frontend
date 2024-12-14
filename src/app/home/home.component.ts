@@ -215,9 +215,7 @@ export class HomeComponent {
       .subscribe(
         (response) => {
           console.log(response);
-          for (let i = 0; i < response.length; i++) {
-            this.mutualFriends.push(response[i]);
-          }
+          this.mutualFriends = response;
         },
         (error) => {
           console.log(error);
