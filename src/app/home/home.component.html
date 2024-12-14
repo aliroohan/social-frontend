@@ -42,10 +42,10 @@
     <div *ngIf="allUsersDiv" class="feed">
       <div class="friend">
         <h3>All Users</h3>
-        <div *ngFor="let user of this.allUsers" class="friend-card">
+        <div *ngFor="let user of this.allUsers; let i = 'index'" class="friend-card">
           <h4>{{ user.name }}</h4>
           <a (click)="seeMutuals(user.id)">{{
-            getMutalFriendsCount(user.id) + " mutual friends"
+            this.mutualFriendsCount[i] +"  "+  i
           }}</a>
           <button *ngIf="!isFriend(user.id)" (click)="addFriend(user.id)">
             Add Friend
@@ -56,8 +56,8 @@
         </div>
       </div>
 
-      <div *ngIf="mutualFriendsDiv" class="feed">
-        <h3>Mutual Friends</h3>
+      <div *ngIf="this.mutualFriendsDiv" class="feed">
+        <h3>Mutual Friends of {{ selectedUserName }}</h3>
         <div *ngFor="let friend of this.mutualFriends" class="friend-card">
           <h4>{{ friend.name }}</h4>
         </div>

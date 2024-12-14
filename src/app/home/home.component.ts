@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { LoginDetailService } from '../login-detail.service';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 class post {
   user_id: number = 0;
   user_name: string = '';
@@ -21,10 +21,10 @@ class post {
 }
 const apiAddress = 'https://social-delta-nine.vercel.app';
 class user {
-  id!: number;
-  name!: string;
-  email!: string;
-  password!: string;
+  id: number = 0;
+  name: string = '';
+  email: string = '';
+  password: string = '';
 }
 @Component({
   selector: 'app-home',
@@ -52,85 +52,72 @@ export class HomeComponent {
   posts: post[] = [];
   friends: user[] = [];
   allUsers: user[] = [];
+  mutualFriendsCount: number[] = [];
   mutualFriends: user[] = [];
+  selectedUserName: string = "";
 
   constructor(
     private login: LoginDetailService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     if (this.login.user_id == 0 || this.login.user_name == '') {
       this.router.navigate(['/login']);
     }
     this.name = login.user_name;
-    this.http
-      .get<user[]>(apiAddress + '/friends/' + this.login.user_id)
-      .subscribe(
-        (response) => {
-          for (let i = 0; i < response.length; i++) {
-            this.friends.push(response[i]);
-            this.http
-              .get<post[]>(apiAddress + '/posts/?user_id=' + response[i].id)
-              .subscribe(
-                (response) => {
-                  for (let j = 0; j < response.length; j++) {
-                    this.posts.push(response[j]);
-                  }
-                },
-                (error) => {
-                  console.log(error);
-                }
-              );
-          }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
 
-    this.http
-      .get<post[]>(apiAddress + '/posts/?user_id=' + this.login.user_id)
-      .subscribe(
-        (response) => {
-          // console.log(response);
-          for (let i = 0; i < response.length; i++) {
-            this.posts.push(response[i]);
-          }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-
-    for (const i of this.friends) {
-    }
-    this.http
-      .get<user[]>(apiAddress + '/users/?id=' + this.login.user_id)
-      .subscribe(
-        (response) => {
-          console.log(response);
-          for (let i = 0; i < response.length; i++) {
-            this.allUsers.push(response[i]);
-          }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-
-    // console.log(this.posts);
+    this.loadFriendsAndPosts();
+    this.loadUserDetails();
+    console.log(this.mutualFriendsCount);
   }
 
-  getMutalFriendsCount(id: number): number {
-    this.http.get(apiAddress + '/mutual-count/' + this.login.user_id + '/' + id).subscribe(
-      (response) => {
-        return response;
-      },
-      (error) => {
-        console.log(error);
+  async loadFriendsAndPosts() {
+    try {
+      const friendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/friends/${this.login.user_id}`));
+      for (const friend of friendsResponse) {
+        this.friends.push(friend);
+        try {
+          const postsResponse = await lastValueFrom(this.http.get<post[]>(`${apiAddress}/posts/?user_id=${friend.id}`));
+          this.posts.push(...postsResponse);
+        } catch (error) {
+          console.log(error);
+        }
       }
-    );
-    return 0;
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      const userPostsResponse = await lastValueFrom(this.http.get<post[]>(`${apiAddress}/posts/?user_id=${this.login.user_id}`));
+      this.posts.push(...userPostsResponse);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async loadUserDetails() {
+    try {
+      const usersResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/users/?id=${this.login.user_id}`));
+      for (const user of usersResponse) {
+        this.mutualFriendsCount.push(await this.getMutalFriendsCount(user.id));
+        this.allUsers.push(user);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(this.mutualFriendsCount);
+  }
+
+  async getMutalFriendsCount(id: number): Promise<number> {
+    try {
+      const response = await lastValueFrom(this.http.get<number>(`${apiAddress}/mutual-count/${this.login.user_id}/${id}`));
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return 0;
+    }
   }
 
   ngOnInit() {
@@ -205,22 +192,24 @@ export class HomeComponent {
   }
 
   seeMutuals(id: number) {
-    this.mutualFriendsDiv = true;
+    this.loadMutualFriends(id);
     this.postdiv = false;
     this.displayFriends = false;
     this.createPosts = false;
-    this.allUsersDiv = false;
-    this.http
-      .get<user[]>(apiAddress + '/mutual-friends/' + this.login.user_id + '/' + id)
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.mutualFriends = response;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    this.allUsersDiv = true;
+    this.mutualFriendsDiv = true;
+    this.selectedUserName = this.allUsers.find(user => user.id === id)?.name || '';
+  }
+
+  async loadMutualFriends(id: number) {
+    try {
+      const response = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/mutual-friends/${this.login.user_id}/${id}`));
+      this.mutualFriends = response;
+      console.log(this.mutualFriends);
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   Post() {
