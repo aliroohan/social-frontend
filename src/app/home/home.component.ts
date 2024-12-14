@@ -48,9 +48,11 @@ export class HomeComponent {
   displayFriends: boolean = false;
   createPosts: boolean = false;
   allUsersDiv: boolean = false;
+  mutualFriendsDiv: boolean = false;
   posts: post[] = [];
   friends: user[] = [];
   allUsers: user[] = [];
+  mutualFriends: user[] = [];
 
   constructor(
     private login: LoginDetailService,
@@ -65,20 +67,32 @@ export class HomeComponent {
       .get<user[]>(apiAddress + '/friends/' + this.login.user_id)
       .subscribe(
         (response) => {
-          console.log(response);
           for (let i = 0; i < response.length; i++) {
             this.friends.push(response[i]);
+            this.http
+              .get<post[]>(apiAddress + '/posts/?user_id=' + response[i].id)
+              .subscribe(
+                (response) => {
+                  for (let j = 0; j < response.length; j++) {
+                    this.posts.push(response[j]);
+                  }
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
           }
         },
         (error) => {
           console.log(error);
         }
       );
+
     this.http
       .get<post[]>(apiAddress + '/posts/?user_id=' + this.login.user_id)
       .subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
           for (let i = 0; i < response.length; i++) {
             this.posts.push(response[i]);
           }
@@ -87,20 +101,8 @@ export class HomeComponent {
           console.log(error);
         }
       );
-    for (let i = 0; i < this.friends.length; i++) {
-      this.http
-        .get<post[]>(apiAddress + '/posts/?user_id=' + this.friends[i].id)
-        .subscribe(
-          (response) => {
-            console.log(response);
-            for (let i = 0; i < response.length; i++) {
-              this.posts.push(response[i]);
-            }
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+
+    for (const i of this.friends) {
     }
     this.http
       .get<user[]>(apiAddress + '/users/?id=' + this.login.user_id)
@@ -116,7 +118,19 @@ export class HomeComponent {
         }
       );
 
-    console.log(this.allUsers);
+    // console.log(this.posts);
+  }
+
+  getMutalFriendsCount(id: number): number {
+    this.http.get(apiAddress + '/mutual-count/' + this.login.user_id + '/' + id).subscribe(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    return 0;
   }
 
   ngOnInit() {
@@ -190,11 +204,33 @@ export class HomeComponent {
     return this.friends.some((friend) => friend.id == id);
   }
 
+  seeMutuals(id: number) {
+    this.mutualFriendsDiv = true;
+    this.postdiv = false;
+    this.displayFriends = false;
+    this.createPosts = false;
+    this.allUsersDiv = false;
+    this.http
+      .get<user[]>(apiAddress + '/mutual-friends/' + this.login.user_id + '/' + id)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          for (let i = 0; i < response.length; i++) {
+            this.mutualFriends.push(response[i]);
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
   Post() {
     this.postdiv = false;
     this.displayFriends = false;
     this.createPosts = true;
     this.allUsersDiv = false;
+    this.mutualFriendsDiv = false;
   }
 
   friendsBtn() {
@@ -202,6 +238,7 @@ export class HomeComponent {
     this.displayFriends = true;
     this.createPosts = false;
     this.allUsersDiv = false;
+    this.mutualFriendsDiv = false;
   }
 
   homeBtn() {
@@ -209,6 +246,7 @@ export class HomeComponent {
     this.displayFriends = false;
     this.createPosts = false;
     this.allUsersDiv = false;
+    this.mutualFriendsDiv = false;
   }
 
   allUsersBtn() {
@@ -216,5 +254,6 @@ export class HomeComponent {
     this.displayFriends = false;
     this.createPosts = false;
     this.allUsersDiv = true;
+    this.mutualFriendsDiv = false;
   }
 }

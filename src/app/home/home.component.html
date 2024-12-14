@@ -14,14 +14,12 @@
       </ul>
     </div>
 
-    
-      <div *ngIf="postdiv" class="feed">
-        <div *ngFor="let post of posts" class="post">
-          <h3>{{ post.user_name }}</h3>
-          <p>{{ post.content }}</p>
-        </div>
+    <div *ngIf="postdiv" class="feed">
+      <div *ngFor="let post of this.posts" class="post">
+        <h3>{{ post.user_name }}</h3>
+        <p>{{ post.content }}</p>
       </div>
-    
+    </div>
 
     <div *ngIf="createPosts" class="feed">
       <mat-form-field class="post-text">
@@ -32,25 +30,40 @@
     </div>
 
     <div *ngIf="displayFriends" class="feed">
-        <div class="friend">
-            <h3>Friends</h3>
-            <div *ngFor="let friend of friends" class="friend-card">
-                <h4>{{ friend.name }}</h4>
-                <button (click)="removeFriend(friend.id)" >Remove Friend</button>
-            </div>
+      <div class="friend">
+        <h3>Friends</h3>
+        <div *ngFor="let friend of this.friends" class="friend-card">
+          <h4>{{ friend.name }}</h4>
+          <button (click)="removeFriend(friend.id)">Remove Friend</button>
         </div>
+      </div>
     </div>
 
     <div *ngIf="allUsersDiv" class="feed">
-        <div class="friend">
-            <h3>All Users</h3>
-            <div *ngFor="let user of this.allUsers" class="friend-card">
-                <h4>{{ user.name }}</h4>
-                <button *ngIf="!isFriend(user.id)" (click)="addFriend(user.id)" >Add Friend</button>
-                <button *ngIf="isFriend(user.id)" (click)="removeFriend(user.id)" >Remove Friend</button>
-            </div>
-        </div>    
+      <div class="friend">
+        <h3>All Users</h3>
+        <div *ngFor="let user of this.allUsers" class="friend-card">
+          <h4>{{ user.name }}</h4>
+          <a (click)="seeMutuals(user.id)">{{
+            getMutalFriendsCount(user.id) + " mutual friends"
+          }}</a>
+          <button *ngIf="!isFriend(user.id)" (click)="addFriend(user.id)">
+            Add Friend
+          </button>
+          <button *ngIf="isFriend(user.id)" (click)="removeFriend(user.id)">
+            Remove Friend
+          </button>
+        </div>
+      </div>
 
-    <div class="right-sidebar"></div>
+      <div *ngIf="mutualFriendsDiv" class="feed">
+        <h3>Mutual Friends</h3>
+        <div *ngFor="let friend of this.mutualFriends" class="friend-card">
+          <h4>{{ friend.name }}</h4>
+        </div>
+
+        <div class="right-sidebar"></div>
+      </div>
+    </div>
   </div>
 </div>
