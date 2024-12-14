@@ -68,7 +68,6 @@ export class HomeComponent {
     this.name = login.user_name;
 
     this.loadFriendsAndPosts();
-    this.loadUserDetails();
     console.log(this.mutualFriendsCount);
   }
 
@@ -170,6 +169,7 @@ export class HomeComponent {
           console.log(error);
         }
       );
+      
   }
 
   addFriend(id: number) {
@@ -185,6 +185,7 @@ export class HomeComponent {
           console.log(error);
         }
       );
+      
   }
 
   isFriend(id: number) {
@@ -242,5 +243,8 @@ export class HomeComponent {
     this.createPosts = false;
     this.allUsersDiv = true;
     this.mutualFriendsDiv = false;
+    this.mutualFriendsCount = [];
+    this.allUsers = [];
+    this.loadUserDetails();
   }
 }

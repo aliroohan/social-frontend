@@ -60,6 +60,12 @@
         <h3>Mutual Friends of {{ selectedUserName }}</h3>
         <div *ngFor="let friend of this.mutualFriends" class="friend-card">
           <h4>{{ friend.name }}</h4>
+          <button *ngIf="!isFriend(friend.id)" (click)="addFriend(friend.id)">
+            Add Friend
+          </button>
+          <button *ngIf="isFriend(friend.id)" (click)="removeFriend(friend.id)">
+            Remove Friend
+          </button>
         </div>
 
         <div class="right-sidebar"></div>
