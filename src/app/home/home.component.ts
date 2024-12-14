@@ -47,22 +47,22 @@ export class HomeComponent {
   postdiv: boolean = true;
   displayFriends: boolean = false;
   createPosts: boolean = false;
+  allUsersDiv: boolean = false;
   posts: post[] = [];
   friends: user[] = [];
-  
+  allUsers: user[] = [];
 
   constructor(
     private login: LoginDetailService,
     private http: HttpClient,
     private router: Router
   ) {
-
     if (this.login.user_id == 0 || this.login.user_name == '') {
       this.router.navigate(['/login']);
     }
     this.name = login.user_name;
     this.http
-      .get<user[]>(apiAddress +'/friends/' + this.login.user_id)
+      .get<user[]>(apiAddress + '/friends/' + this.login.user_id)
       .subscribe(
         (response) => {
           console.log(response);
@@ -74,26 +74,22 @@ export class HomeComponent {
           console.log(error);
         }
       );
-      this.http
-        .get<post[]>(
-          apiAddress+'/posts/?user_id=' + this.login.user_id
-        )
-        .subscribe(
-          (response) => {
-            console.log(response);
-            for (let i = 0; i < response.length; i++) {
-              this.posts.push(response[i]);
-            }
-          },
-          (error) => {
-            console.log(error);
+    this.http
+      .get<post[]>(apiAddress + '/posts/?user_id=' + this.login.user_id)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          for (let i = 0; i < response.length; i++) {
+            this.posts.push(response[i]);
           }
-        );
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     for (let i = 0; i < this.friends.length; i++) {
       this.http
-        .get<post[]>(
-          apiAddress+'/posts/?user_id=' + this.friends[i].id
-        )
+        .get<post[]>(apiAddress + '/posts/?user_id=' + this.friends[i].id)
         .subscribe(
           (response) => {
             console.log(response);
@@ -106,10 +102,22 @@ export class HomeComponent {
           }
         );
     }
-    console.log(this.posts);
-  }
+    this.http
+      .get<user[]>(apiAddress + '/users/?id=' + this.login.user_id)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          for (let i = 0; i < response.length; i++) {
+            this.allUsers.push(response[i]);
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
-  
+    console.log(this.allUsers);
+  }
 
   ngOnInit() {
     if (this.login.user_id == 0) {
@@ -120,7 +128,8 @@ export class HomeComponent {
   createPost() {
     this.http
       .post(
-        apiAddress + '/posts/?user_id=' +
+        apiAddress +
+          '/posts/?user_id=' +
           this.login.user_id +
           '&content=' +
           this.postContent,
@@ -132,7 +141,11 @@ export class HomeComponent {
       .subscribe(
         (response) => {
           console.log(response);
-          const newPost = new post(this.login.user_id, this.login.user_name, this.postContent);
+          const newPost = new post(
+            this.login.user_id,
+            this.login.user_name,
+            this.postContent
+          );
           this.posts.push(newPost);
           alert('Post created successfully');
           this.postContent = '';
@@ -156,25 +169,52 @@ export class HomeComponent {
           console.log(error);
         }
       );
+  }
 
+  addFriend(id: number) {
+    this.http
+      .post(apiAddress + '/friend/' + this.login.user_id + '/' + id, {})
+      .subscribe(
+        (response) => {
+          console.log(response);
+          alert('Friend added successfully');
+          this.friends.push(this.allUsers.find((user) => user.id == id)!);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  isFriend(id: number) {
+    return this.friends.some((friend) => friend.id == id);
   }
 
   Post() {
     this.postdiv = false;
     this.displayFriends = false;
     this.createPosts = true;
+    this.allUsersDiv = false;
   }
 
   friendsBtn() {
     this.postdiv = false;
     this.displayFriends = true;
     this.createPosts = false;
-
+    this.allUsersDiv = false;
   }
 
   homeBtn() {
     this.postdiv = true;
     this.displayFriends = false;
     this.createPosts = false;
+    this.allUsersDiv = false;
+  }
+
+  allUsersBtn() {
+    this.postdiv = false;
+    this.displayFriends = false;
+    this.createPosts = false;
+    this.allUsersDiv = true;
   }
 }
