@@ -25,6 +25,7 @@ class user {
   name: string = '';
   email: string = '';
   password: string = '';
+  mutualCount: number = 0;
 }
 @Component({
   selector: 'app-home',
@@ -68,6 +69,7 @@ export class HomeComponent {
     this.name = login.user_name;
 
     this.loadFriendsAndPosts();
+    this.loadUserDetails();
     console.log(this.mutualFriendsCount);
   }
 
@@ -99,7 +101,7 @@ export class HomeComponent {
     try {
       const usersResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/users/?id=${this.login.user_id}`));
       for (const user of usersResponse) {
-        this.mutualFriendsCount.push(await this.getMutalFriendsCount(user.id));
+        user.mutualCount = await this.getMutalFriendsCount(user.id);
         this.allUsers.push(user);
       }
     } catch (error) {
@@ -169,7 +171,6 @@ export class HomeComponent {
           console.log(error);
         }
       );
-      
   }
 
   addFriend(id: number) {
@@ -243,7 +244,7 @@ export class HomeComponent {
     this.createPosts = false;
     this.allUsersDiv = true;
     this.mutualFriendsDiv = false;
-    this.mutualFriendsCount = [];
+    // this.mutualFriendsCount = [];
     this.allUsers = [];
     this.loadUserDetails();
   }

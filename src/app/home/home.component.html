@@ -45,7 +45,7 @@
         <div *ngFor="let user of this.allUsers; let i = 'index'" class="friend-card">
           <h4>{{ user.name }}</h4>
           <a (click)="seeMutuals(user.id)">{{
-            this.mutualFriendsCount[i] +"  "+  i
+            user.mutualCount + " mutual friends"
           }}</a>
           <button *ngIf="!isFriend(user.id)" (click)="addFriend(user.id)">
             Add Friend
