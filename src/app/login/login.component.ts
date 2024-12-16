@@ -114,10 +114,10 @@ export class LoginComponent {
         },
         (error) => {
           if (error.status === 400) {
-            this.errorMessage = 'User with this email already exists';
+            this.errorMessage = error.error.detail;
           } else {
             this.errorMessage =
-              'An unexpected error occurred. Please try again.';
+              error.error.detail || 'An unexpected error occurred. Please try again.';
           }
           this.name = '';
           this.email = '';
