@@ -97,8 +97,9 @@ export class HomeComponent {
     }
 
     try {
-      const suggestedFriendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/suggested-friends/${this.login.user_id}`),);
+      const suggestedFriendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/suggested-friends/${this.login.user_id}`));
       this.suggestedFriends = suggestedFriendsResponse;
+      console.log(this.suggestedFriends);
     } catch (error) {
       console.log(error);
     }
@@ -107,10 +108,7 @@ export class HomeComponent {
   async loadUserDetails() {
     try {
       const usersResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/users/?id=${this.login.user_id}`));
-      for (const user of usersResponse) {
-        user.mutualCount = await this.getMutalFriendsCount(user.id);
-        this.allUsers.push(user);
-      }
+      this.allUsers = usersResponse;
     } catch (error) {
       console.log(error);
     }
@@ -274,7 +272,5 @@ export class HomeComponent {
     this.allUsersDiv = false;
     this.mutualFriendsDiv = false;
     this.suggested = true;
-    this.allUsers = [];
-    this.loadUserDetails();
   }
 }

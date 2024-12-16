@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div *ngIf="allUsersDiv" class="feed">
+    <div *ngIf="this.allUsersDiv" class="feed">
       <div class="friend">
         <h3>All Users</h3>
         <div *ngFor="let user of this.allUsers; let i = 'index'" class="friend-card">
