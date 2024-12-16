@@ -129,6 +129,9 @@
         <div *ngFor="let friend of this.friends" class="user1">
           <div class="pic"></div>
           <h3>{{ friend.name }}</h3>
+          <a (click)="seeMutuals(friend.id)">{{
+            friend.mutualCount + " mutual friends"
+          }}</a>
           <button (click)="removeFriend(friend.id)" id="addFriend">
             Remove Friend
             <i class="bx bx-minus-circle"></i>
@@ -143,6 +146,9 @@
         <div *ngFor="let friend of this.suggestedFriends" class="user1">
           <div class="pic"></div>
           <h3>{{ friend.name }}</h3>
+          <a (click)="seeMutuals(friend.id)">{{
+            friend.mutualCount + " mutual friends"
+          }}</a>
           <button
             *ngIf="!isFriend(friend.id)"
             (click)="addFriend(friend.id)"
