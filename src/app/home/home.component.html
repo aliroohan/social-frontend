@@ -2,6 +2,7 @@
   <div class="navbar">
     <h1>MySocial</h1>
     <p>{{ name }}</p>
+    <button (click)="logout()">Logout</button>
   </div>
 
   <div class="content">
@@ -11,6 +12,7 @@
         <li (click)="Post()">Create Post</li>
         <li (click)="friendsBtn()">Friends</li>
         <li (click)="allUsersBtn()">All Users</li>
+        <li (click)="suggestFriendsBtn()">suggested-friends</li>
       </ul>
     </div>
 
@@ -68,6 +70,17 @@
           </button>
         </div>
 
+        <div *ngIf="this.suggested" class="feed">
+        <h3>Suggested Friends</h3>
+        <div *ngFor="let friend of this.suggestedFriends" class="friend-card">
+          <h4>{{ friend.name }}</h4>
+          <button *ngIf="!isFriend(friend.id)" (click)="addFriend(friend.id)">
+            Add Friend
+          </button>
+          <button *ngIf="isFriend(friend.id)" (click)="removeFriend(friend.id)">
+            Remove Friend
+          </button>
+        </div>
         <div class="right-sidebar"></div>
       </div>
     </div>

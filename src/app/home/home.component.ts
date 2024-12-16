@@ -50,18 +50,18 @@ export class HomeComponent {
   createPosts: boolean = false;
   allUsersDiv: boolean = false;
   mutualFriendsDiv: boolean = false;
+  suggested: boolean = false;
   posts: post[] = [];
   friends: user[] = [];
   allUsers: user[] = [];
-  mutualFriendsCount: number[] = [];
   mutualFriends: user[] = [];
   selectedUserName: string = "";
+  suggestedFriends: user[] = [];
 
   constructor(
     private login: LoginDetailService,
     private http: HttpClient,
-    private router: Router,
-    private cdr: ChangeDetectorRef
+    private router: Router, 
   ) {
     if (this.login.user_id == 0 || this.login.user_name == '') {
       this.router.navigate(['/login']);
@@ -70,7 +70,7 @@ export class HomeComponent {
 
     this.loadFriendsAndPosts();
     this.loadUserDetails();
-    console.log(this.mutualFriendsCount);
+    
   }
 
   async loadFriendsAndPosts() {
@@ -95,6 +95,13 @@ export class HomeComponent {
     } catch (error) {
       console.log(error);
     }
+
+    try {
+      const suggestedFriendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/suggested-friends/${this.login.user_id}`),);
+      this.suggestedFriends = suggestedFriendsResponse;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async loadUserDetails() {
@@ -107,7 +114,6 @@ export class HomeComponent {
     } catch (error) {
       console.log(error);
     }
-    console.log(this.mutualFriendsCount);
   }
 
   async getMutalFriendsCount(id: number): Promise<number> {
@@ -122,7 +128,7 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    if (this.login.user_id == 0) {
+    if (this.login.user_id == 0 || this.login.user_name == '') {
       this.router.navigate(['/login']);
     }
   }
@@ -214,12 +220,22 @@ export class HomeComponent {
     }
   }
 
+  
+  logout() {
+    this.login.user_id = 0;
+    this.login.user_name = '';
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_name');
+    this.router.navigate(['/login']);
+  } 
+
   Post() {
     this.postdiv = false;
     this.displayFriends = false;
     this.createPosts = true;
     this.allUsersDiv = false;
-    this.mutualFriendsDiv = false;
+    this.mutualFriendsDiv = false;  
+    this.suggested = false;
   }
 
   friendsBtn() {
@@ -228,6 +244,7 @@ export class HomeComponent {
     this.createPosts = false;
     this.allUsersDiv = false;
     this.mutualFriendsDiv = false;
+    this.suggested = false;
   }
 
   homeBtn() {
@@ -236,6 +253,7 @@ export class HomeComponent {
     this.createPosts = false;
     this.allUsersDiv = false;
     this.mutualFriendsDiv = false;
+    this.suggested = false;
   }
 
   allUsersBtn() {
@@ -243,8 +261,19 @@ export class HomeComponent {
     this.displayFriends = false;
     this.createPosts = false;
     this.allUsersDiv = true;
+    this.mutualFriendsDiv = false;  
+    this.suggested = false;
+    this.allUsers = [];
+    this.loadUserDetails();
+  }
+
+  suggestFriendsBtn() {
+    this.postdiv = false;
+    this.displayFriends = false;
+    this.createPosts = false;
+    this.allUsersDiv = false;
     this.mutualFriendsDiv = false;
-    // this.mutualFriendsCount = [];
+    this.suggested = true;
     this.allUsers = [];
     this.loadUserDetails();
   }

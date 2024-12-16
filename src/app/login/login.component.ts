@@ -43,7 +43,11 @@ export class LoginComponent {
     private http: HttpClient,
     private login: LoginDetailService,
     private router: Router
-  ) {}
+  ) {
+    if (localStorage.getItem('user_id')) {
+      this.router.navigate(['/home']);
+    }
+  }
   toggleForm() {
     this.isLogin = !this.isLogin;
     this.errorMessage = '';
@@ -61,6 +65,8 @@ export class LoginComponent {
           this.login.user_id = response['id'];
           this.login.user_name = response['name'];
           this.router.navigate(['/home']);
+          localStorage.setItem('user_id', this.login.user_id.toString());
+          localStorage.setItem('user_name', this.login.user_name);
           console.log('Login successful', response);
         },
         (error) => {
@@ -99,6 +105,10 @@ export class LoginComponent {
       )
       .subscribe(
         (response) => {
+          alert('Signup successful');
+          this.email = '';
+          this.password = '';
+          this.name = '';
           console.log('Signup successful', response);
           
         },
@@ -116,4 +126,5 @@ export class LoginComponent {
         }
       );
   }
+
 }
