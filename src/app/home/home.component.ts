@@ -201,6 +201,7 @@ export class HomeComponent {
     this.displayFriends = false;
     this.createPosts = false;
     this.allUsersDiv = false;
+    this.suggested = false;
     this.mutualFriendsDiv = true;
     this.selectedUserName = this.allUsers.find(user => user.id === id)?.name || '';
   }
