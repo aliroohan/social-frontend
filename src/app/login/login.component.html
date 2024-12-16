@@ -32,14 +32,16 @@
       </div>
       <div class="input-box">
         <input
-          type="password"
+          [type]="showPassword ? 'text' : 'password'"
           placeholder="password"
           [(ngModel)]="password"
           name="password"
-          type="password"
           required
         />
-        <i class="bx bxs-lock-alt"></i>
+        
+        <button type="button" (click)="togglePasswordVisibility()">
+          {{ showPassword ? 'Hide' : 'Show' }}
+        </button>
       </div>
 
       <button type="submit" class="btn">

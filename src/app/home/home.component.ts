@@ -42,6 +42,8 @@ class user {
 })
 export class HomeComponent {
   name: string = '';
+  email: string = '';
+  password: string = '';
   postContent: string = '';
   postdiv: boolean = true;
   displayFriends: boolean = false;
@@ -57,7 +59,7 @@ export class HomeComponent {
   suggestedFriends: user[] = [];
 
   constructor(
-    private login: LoginDetailService,
+    public login: LoginDetailService,
     private http: HttpClient,
     private router: Router, 
   ) {
@@ -65,6 +67,8 @@ export class HomeComponent {
       this.router.navigate(['/login']);
     }
     this.name = login.user_name;
+    this.email = login.email;
+    this.password = login.password;
 
     this.loadFriendsAndPosts();
     this.loadUserDetails();

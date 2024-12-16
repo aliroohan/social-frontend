@@ -39,6 +39,7 @@ export class LoginComponent {
   password: string = '';
   name: string = '';
   errorMessage: string = '';
+  showPassword: boolean = false; // Variable to track password visibility
   constructor(
     private http: HttpClient,
     private login: LoginDetailService,
@@ -52,6 +53,9 @@ export class LoginComponent {
     this.isLogin = !this.isLogin;
     this.errorMessage = '';
   }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword; // Toggle password visibility
+  }
   onLogin() {
     this.http
       .get<User>(
@@ -64,9 +68,13 @@ export class LoginComponent {
         (response) => {
           this.login.user_id = response['id'];
           this.login.user_name = response['name'];
+          this.login.email = response['email'];
+          this.login.password = response['password'];
           this.router.navigate(['/home']);
           localStorage.setItem('user_id', this.login.user_id.toString());
           localStorage.setItem('user_name', this.login.user_name);
+          localStorage.setItem('email', this.login.email);
+          localStorage.setItem('password', this.login.password);
           console.log('Login successful', response);
         },
         (error) => {
