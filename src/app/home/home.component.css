@@ -1,54 +1,47 @@
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Ubuntu", sans-serif;
 }
-.body{
+
+.body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* background-color: rgb(44, 173, 106); */
     background: url('../../assets/1.jpg');
     background-size: cover;
     background-position: center;
 }
 
-
-
 /* left header profile section */
-/* left header profile section */
-/* left header profile section */
-.left-header{
+.left-header {
     position: fixed;
     height: 37.3rem;
     width: 17.9rem;
     top: 0.5rem;
     left: 10px;
-    background:transparent ;
+    background: transparent;
     border: 2px solid rgba(189, 177, 177, 0.799);
     backdrop-filter: blur(5px);
-    box-shadow: 0 , 0, 10px , rgba(0,0,0,.2);
+    box-shadow: 0, 0, 10px, rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 5px;
 }
 
-.picture{
+.picture {
     position: absolute;
     height: 10rem;
     width: 10rem;
-    background: url('../../assets/g.jpeg'); ;
+    background: url('../../assets/g.jpeg');
     background-size: cover;
-    /* background-position: center; */
     left: 4rem;
     top: 2rem;
     border-radius: 50%;
-    
 }
 
-.left-header h3{
+.left-header h3 {
     position: absolute;
     margin-left: 30px;
     top: 14.5rem;
@@ -56,66 +49,25 @@
     background-color: rgb(135, 129, 221);
     font-size: 1.1rem;
     border-radius: 15px;
-    padding: 5px 15px 5px 15px;
+    padding: 5px 15px;
 }
 
-
-.username{
+.username, .email, .password, .bio {
     position: relative;
     top: 18rem;
     left: 1.5rem;
     font-size: 1rem;
     color: rgba(61, 215, 123, 0.895);
-}
-.username p{
-    margin-top: 5px;
-    margin-bottom: 15px;
-    color: white;
-}
-.email{
-    position: relative;
-    top: 18rem;
-    left: 1.5rem;
-    font-size: 1rem;
-    color: rgba(61, 215, 123, 0.895);
-}
-.email p{
-    margin-top: 5px;
-    margin-bottom: 15px;
-    color: white;
-}
-.password{
-    position: relative;
-    top: 18rem;
-    left: 1.5rem;
-    font-size: 1rem;
-    color: rgba(61, 215, 123, 0.895);
-}
-.password p{
-    margin-top: 5px;
-    margin-bottom: 15px;
-    color: white;
-}
-.bio{
-    position: relative;
-    top: 18rem;
-    left: 1.5rem;
-    font-size: 1rem;
-    color: rgba(61, 215, 123, 0.895);
-}
-.bio p{
-    margin-top: 5px;
-    margin-bottom: 15px;
-    color: white;
 }
 
+.username p, .email p, .password p, .bio p {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: white;
+}
 
 /* TOP HEADER SECTION */
-/* TOP HEADER SECTION */
-/* TOP HEADER SECTION */
-
-
-.top-header{
+.top-header {
     display: flex;
     justify-content: space-between;
     position: fixed;
@@ -123,20 +75,19 @@
     width: 70rem;
     top: 0.5rem;
     right: 0;
-    background:transparent ;
+    background: transparent;
     border: 2px solid rgba(189, 177, 177, 0.799);
     backdrop-filter: blur(5px);
-    box-shadow: 0 , 0, 10px , rgba(0,0,0,.2);
+    box-shadow: 0, 0, 10px, rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 5px;
-
 }
 
-.top-header .left-part{
+.top-header .left-part {
     display: flex;
 }
 
-.top-header .btn{
+.top-header .btn {
     width: 7rem;
     height: 2.5rem;
     color: rgba(2, 20, 11, 0.895);
@@ -151,56 +102,50 @@
     margin-left: 1rem;
 }
 
-.right-part .btn{
+.right-part .btn {
     margin-right: 0.5rem;
     color: white;
     background-color: rgb(92, 48, 48);
 }
 
-
 /* starting main content part */
-/* starting main content part */
-/* starting main content part */
-/* starting main content part */
-
-
-.main-content{
+.main-content {
     position: fixed;
     height: 31.9rem;
     width: 70rem;
     top: 5.9rem;
     right: 0;
-    background:transparent ;
+    background: transparent;
     border: 2px solid rgba(189, 177, 177, 0.799);
     color: #fff;
     backdrop-filter: blur(10px);
-    box-shadow: 0 , 0, 10px , rgba(0,0,0,.2);
+    box-shadow: 0, 0, 10px, rgba(0, 0, 0, .2);
     border-radius: 5px;
     overflow: scroll;
-
 }
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
     height: 0;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #597f76;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(135, 129, 221);
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #597f76;
-  }
+}
 
-.post-section h2{
+/* Track */
+::-webkit-scrollbar-track {
+    background: #597f76;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(135, 129, 221);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #597f76;
+}
+
+.post-section h2 {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -210,67 +155,16 @@
     color: rgba(2, 20, 11, 0.895);
     background-color: rgb(196, 194, 224);
     border-radius: 15px;
-    padding: 3px 10px 3px 10px;
+    padding: 3px 10px;
 }
 
-
-.cards{
+.cards {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-
 }
 
-.card1{
-    width: 67rem;
-    height: 10rem;
-    margin-top: 2rem;
-    margin-left: 1rem;
-    padding: 1rem;
-    border-radius: 2rem;
-    border: 2px solid rgb(195, 182, 182);
-}
-.card1 i{
-    font-size: x-large;
-    position: relative;
-    top: 1.9rem;
-    left: 0.2rem;
-}
-.card1 h4{
-    color: rgba(61, 215, 123, 0.895);
-}
-.card1 p{
-    margin-top: 1rem;
-    color:  rgba(255, 255, 255, 0.895);
-    font-weight: 500;
-    line-height: 1.3rem;
-}
-
-.card2{
-    width: 67rem;
-    height: 10rem;
-    margin-top: 2rem;
-    margin-left: 1rem;
-    padding: 1rem;
-    border-radius: 2rem;
-    border: 2px solid rgb(195, 182, 182);
-}
-.card2 i{
-    font-size: x-large;
-    position: relative;
-    top: 1.9rem;
-    left: 0.2rem;
-}
-.card2 h4{
-    color: rgba(61, 215, 123, 0.895);
-}
-.card2 p{
-    margin-top: 1rem;
-    color:  rgba(255, 255, 255, 0.895);
-    font-weight: 500;
-    line-height: 1.3rem;
-}
-.card3{
+.card1 {
     width: 67rem;
     height: 10rem;
     margin-top: 2rem;
@@ -280,53 +174,26 @@
     border: 2px solid rgb(195, 182, 182);
 }
 
-.card3 i{
+.card1 i {
     font-size: x-large;
     position: relative;
     top: 1.9rem;
     left: 0.2rem;
 }
-.card3 h4{
+
+.card1 h4 {
     color: rgba(61, 215, 123, 0.895);
 }
-.card3 p{
+
+.card1 p {
     margin-top: 1rem;
-    color:  rgba(255, 255, 255, 0.895);
+    color: rgba(255, 255, 255, 0.895);
     font-weight: 500;
     line-height: 1.3rem;
 }
-.card4{
-    width: 67rem;
-    height: 10rem;
-    margin-top: 2rem;
-    margin-left: 1rem;
-    padding: 1rem;
-    border-radius: 2rem;
-    border: 2px solid rgb(195, 182, 182);
-}
-
-.card4 i{
-    font-size: x-large;
-    position: relative;
-    top: 1.9rem;
-    left: 0.2rem;
-}
-.card4 h4{
-    color: rgba(61, 215, 123, 0.895);
-}
-.card4 p{
-    margin-top: 1rem;
-    color:  rgba(255, 255, 255, 0.895);
-    font-weight: 500;
-    line-height: 1.3rem;
-}
-
 
 /* main content all user section */
-/* main content all user section */
-
-
-.all-users-section h2{
+.all-users-section h2 {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -336,12 +203,12 @@
     color: rgba(2, 20, 11, 0.895);
     background-color: rgb(196, 194, 224);
     border-radius: 15px;
-    padding: 5px 2px ;
+    padding: 5px 2px;
     font-size: 1.3rem;
     font-weight: 500;
 }
 
-.users{
+.users {
     display: flex;
     justify-content: space-around;
     align-items: start;
@@ -350,7 +217,7 @@
     margin-top: 1rem;
 }
 
-.user1{
+.user1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -363,23 +230,22 @@
     border-radius: 3rem;
 }
 
-.user1 .pic{
+.user1 .pic {
     height: 6.5rem;
     width: 6.5rem;
     margin: 1rem;
     background: url("../../assets/g.jpeg");
     background-size: cover;
     border-radius: 50%;
-
 }
 
-.user1 h3{
+.user1 h3 {
     font-size: 0.9rem;
     color: rgba(18, 19, 18, 0.895);
     margin-top: 1.3rem;
 }
 
-.user1 button{
+.user1 button {
     cursor: pointer;
     color: rgba(15, 14, 14, 0.895);
     background-color: rgb(141, 135, 223);
@@ -392,16 +258,8 @@
     border-style: none;
 }
 
-.user1 button i{
-    border: 2px solid rgb(236, 232, 232);
-    border-radius: 3rem;
-}
-
-/* Main content craete post */
-/* Main content craete post */
-/* Main content craete post */
-
-.create-post h2{
+/* Main content create post */
+.create-post h2 {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -416,7 +274,7 @@
     font-size: 20px;
 }
 
-.create-post textarea{
+.create-post textarea {
     margin-left: 1.3rem;
     width: 96%;
     height: 15rem;
@@ -428,7 +286,7 @@
     border-style: none;
 }
 
-.create-post button{
+.create-post button {
     display: flex;
     justify-self: flex-end;
     cursor: pointer;
@@ -443,8 +301,8 @@
     border-style: none;
 }
 
-/* My friends seaction */
-.friend-list h2{
+/* My friends section */
+.friend-list h2 {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -459,8 +317,7 @@
     font-size: 20px;
 }
 
-
-.friends{
+.friends {
     display: flex;
     justify-content: space-around;
     align-items: start;
@@ -469,7 +326,7 @@
     margin-top: 1rem;
 }
 
-.friend1{
+.friend1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -482,23 +339,22 @@
     border-radius: 3rem;
 }
 
-.friend1 .pic{
+.friend1 .pic {
     height: 6.5rem;
     width: 6.5rem;
     margin: 1rem;
     background: url("../../assets/g.jpeg");
     background-size: cover;
     border-radius: 50%;
-
 }
 
-.friend1 h3{
+.friend1 h3 {
     font-size: 0.9rem;
     color: rgba(18, 19, 18, 0.895);
     margin-top: 1.3rem;
 }
 
-.friend1 button{
+.friend1 button {
     cursor: pointer;
     color: rgba(15, 14, 14, 0.895);
     background-color: rgb(141, 135, 223);
@@ -511,15 +367,8 @@
     border-style: none;
 }
 
-.friend1 button i{
-    border: 2px solid rgb(236, 232, 232);
-    border-radius: 3rem;
-}
-
-
-
-/* My Mutuals seaction */
-.mutual-list h2{
+/* My suggestions section */
+.suggestion-list h2 {
     display: flex;
     justify-content: center;
     align-self: center;
@@ -534,8 +383,7 @@
     font-size: 20px;
 }
 
-
-.mutuals{
+.suggestions {
     display: flex;
     justify-content: space-around;
     align-items: start;
@@ -544,7 +392,7 @@
     margin-top: 1rem;
 }
 
-.mutual1{
+.suggestion1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -557,23 +405,22 @@
     border-radius: 3rem;
 }
 
-.mutual1 .pic{
+.suggestion1 .pic {
     height: 6.5rem;
     width: 6.5rem;
     margin: 1rem;
     background: url("../../assets/g.jpeg");
     background-size: cover;
     border-radius: 50%;
-
 }
 
-.mutual1 h3{
+.suggestion1 h3 {
     font-size: 0.9rem;
     color: rgba(18, 19, 18, 0.895);
     margin-top: 1.3rem;
 }
 
-.mutual1 button{
+.suggestion1 button {
     cursor: pointer;
     color: rgba(15, 14, 14, 0.895);
     background-color: rgb(141, 135, 223);
@@ -584,85 +431,4 @@
     font-weight: 600;
     font-size: 0.7rem;
     border-style: none;
-}
-
-.mutual1 button i{
-    border: 2px solid rgb(236, 232, 232);
-    border-radius: 3rem;
-}
-
-
-
-
-/* My suggestions seaction */
-.suggestion-list h2{
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    margin-right: 60rem;
-    width: 11rem;
-    color: rgba(2, 20, 11, 0.895);
-    background-color: rgb(196, 194, 224);
-    border-radius: 15px;
-    padding: 3px 10px;
-    font-size: 20px;
-}
-
-
-.suggestions{
-    display: flex;
-    justify-content: space-around;
-    align-items: start;
-    flex-wrap: wrap;
-    margin-left: 1rem;
-    margin-top: 1rem;
-}
-
-.suggestion1{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-right: 2rem;
-    margin-bottom: 1rem;
-    background-color: rgb(222, 222, 222);
-    height: 14.5rem;
-    width: 14rem;
-    border-radius: 3rem;
-}
-
-.suggestion1 .pic{
-    height: 6.5rem;
-    width: 6.5rem;
-    margin: 1rem;
-    background: url("../../assets/g.jpeg");
-    background-size: cover;
-    border-radius: 50%;
-
-}
-
-.suggestion1 h3{
-    font-size: 0.9rem;
-    color: rgba(18, 19, 18, 0.895);
-    margin-top: 1.3rem;
-}
-
-.suggestion1 button{
-    cursor: pointer;
-    color: rgba(15, 14, 14, 0.895);
-    background-color: rgb(141, 135, 223);
-    padding: 0.4rem 0.7rem;
-    border-radius: 2rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    font-size: 0.7rem;
-    border-style: none;
-}
-
-.suggestion1 button i{
-    border: 2px solid rgb(236, 232, 232);
-    border-radius: 3rem;
 }
