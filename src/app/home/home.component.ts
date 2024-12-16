@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { LoginDetailService } from '../login-detail.service';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormField} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
@@ -32,8 +32,6 @@ class user {
   imports: [
     MatCardModule,
     CommonModule,
-    MatFormField,
-    MatLabel,
     FormsModule,
     MatInputModule,
     MatButtonModule,
@@ -202,7 +200,7 @@ export class HomeComponent {
     this.postdiv = false;
     this.displayFriends = false;
     this.createPosts = false;
-    this.allUsersDiv = true;
+    this.allUsersDiv = false;
     this.mutualFriendsDiv = true;
     this.selectedUserName = this.allUsers.find(user => user.id === id)?.name || '';
   }
@@ -272,5 +270,16 @@ export class HomeComponent {
     this.allUsersDiv = false;
     this.mutualFriendsDiv = false;
     this.suggested = true;
+    this.loadSuggestedFriends();
+  }
+
+  async loadSuggestedFriends() {
+    try {
+      const suggestedFriendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/suggested-friends/${this.login.user_id}`));
+      this.suggestedFriends = suggestedFriendsResponse;
+      console.log(this.suggestedFriends);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

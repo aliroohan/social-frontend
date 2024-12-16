@@ -1,107 +1,668 @@
-.homepage-container {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Ubuntu", sans-serif;
 }
-
-.navbar {
-  background-color: #3b5998;
-  color: white;
-  padding: 10px 50px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar input {
-  padding: 5px;
-  width: 200px;
-}
-
-.content {
-  display: flex;
-  margin-top: 20px;
-}
-
-.sidebar {
-  width: 20%;
-  /* background-color: #f5f5f5; */
-  padding: 10px;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #8c8a8a;
-  margin-bottom: 5px;
-  text-align: center;
-}
-
-.sidebar ul li:hover {
-  background-color: #d3d3d3;
-}
-
-.feed {
-  width: 60%;
-  padding: 10px;
-}
-
-.post-btn{
-    display: inline-block;
- border-radius: 50px;
- border: none;
- background: #1875FF;
- color: white;
- font-family: inherit;
- text-align: center;
- font-size: 13px;
- box-shadow: 0px 14px 56px -11px #1875FF;
- width: 10em;
- padding: 1em;
- transition: all 0.4s;
- cursor: pointer;
-}
-
-.post {
-  background-color: #ffffff;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.post-text {
-    width: 100%;
-    border: none;
-    border-radius: 20%;
-}
-
-.right-sidebar {
-  width: 20%;
-  padding: 10px;
-  background-color: #f5f5f5;
-}
-
-.right-sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.right-sidebar ul li {
-  margin-bottom: 10px;
-}
-
-.friend-card {
+.body{
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
-    padding: 10px;
-    border: 1px solid #ddd;
+    min-height: 100vh;
+    /* background-color: rgb(44, 173, 106); */
+    background: url('../../assets/1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+/* left header profile section */
+/* left header profile section */
+/* left header profile section */
+.left-header{
+    position: fixed;
+    height: 37.3rem;
+    width: 17.9rem;
+    top: 0.5rem;
+    left: 10px;
+    background:transparent ;
+    border: 2px solid rgba(189, 177, 177, 0.799);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 , 0, 10px , rgba(0,0,0,.2);
+    color: #fff;
     border-radius: 5px;
+}
+
+.picture{
+    position: absolute;
+    height: 10rem;
+    width: 10rem;
+    background: url('../../assets/g.jpeg'); ;
+    background-size: cover;
+    /* background-position: center; */
+    left: 4rem;
+    top: 2rem;
+    border-radius: 50%;
+    
+}
+
+.left-header h3{
+    position: absolute;
+    margin-left: 30px;
+    top: 14.5rem;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(135, 129, 221);
+    font-size: 1.1rem;
+    border-radius: 15px;
+    padding: 5px 15px 5px 15px;
+}
+
+
+.username{
+    position: relative;
+    top: 18rem;
+    left: 1.5rem;
+    font-size: 1rem;
+    color: rgba(61, 215, 123, 0.895);
+}
+.username p{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: white;
+}
+.email{
+    position: relative;
+    top: 18rem;
+    left: 1.5rem;
+    font-size: 1rem;
+    color: rgba(61, 215, 123, 0.895);
+}
+.email p{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: white;
+}
+.password{
+    position: relative;
+    top: 18rem;
+    left: 1.5rem;
+    font-size: 1rem;
+    color: rgba(61, 215, 123, 0.895);
+}
+.password p{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: white;
+}
+.bio{
+    position: relative;
+    top: 18rem;
+    left: 1.5rem;
+    font-size: 1rem;
+    color: rgba(61, 215, 123, 0.895);
+}
+.bio p{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+
+/* TOP HEADER SECTION */
+/* TOP HEADER SECTION */
+/* TOP HEADER SECTION */
+
+
+.top-header{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    height: 5rem;
+    width: 70rem;
+    top: 0.5rem;
+    right: 0;
+    background:transparent ;
+    border: 2px solid rgba(189, 177, 177, 0.799);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 , 0, 10px , rgba(0,0,0,.2);
+    color: #fff;
+    border-radius: 5px;
+
+}
+
+.top-header .left-part{
+    display: flex;
+}
+
+.top-header .btn{
+    width: 7rem;
+    height: 2.5rem;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(196, 194, 224);
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 1.1rem;
+    margin-left: 1rem;
+}
+
+.right-part .btn{
+    margin-right: 0.5rem;
+    color: white;
+    background-color: rgb(92, 48, 48);
+}
+
+
+/* starting main content part */
+/* starting main content part */
+/* starting main content part */
+/* starting main content part */
+
+
+.main-content{
+    position: fixed;
+    height: 31.9rem;
+    width: 70rem;
+    top: 5.9rem;
+    right: 0;
+    background:transparent ;
+    border: 2px solid rgba(189, 177, 177, 0.799);
+    color: #fff;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 , 0, 10px , rgba(0,0,0,.2);
+    border-radius: 5px;
+    overflow: scroll;
+
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 0;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #597f76;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(135, 129, 221);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #597f76;
+  }
+
+.post-section h2{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 60rem;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(196, 194, 224);
+    border-radius: 15px;
+    padding: 3px 10px 3px 10px;
+}
+
+
+.cards{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+.card1{
+    width: 67rem;
+    height: 10rem;
+    margin-top: 2rem;
+    margin-left: 1rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    border: 2px solid rgb(195, 182, 182);
+}
+.card1 i{
+    font-size: x-large;
+    position: relative;
+    top: 1.9rem;
+    left: 0.2rem;
+}
+.card1 h4{
+    color: rgba(61, 215, 123, 0.895);
+}
+.card1 p{
+    margin-top: 1rem;
+    color:  rgba(255, 255, 255, 0.895);
+    font-weight: 500;
+    line-height: 1.3rem;
+}
+
+.card2{
+    width: 67rem;
+    height: 10rem;
+    margin-top: 2rem;
+    margin-left: 1rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    border: 2px solid rgb(195, 182, 182);
+}
+.card2 i{
+    font-size: x-large;
+    position: relative;
+    top: 1.9rem;
+    left: 0.2rem;
+}
+.card2 h4{
+    color: rgba(61, 215, 123, 0.895);
+}
+.card2 p{
+    margin-top: 1rem;
+    color:  rgba(255, 255, 255, 0.895);
+    font-weight: 500;
+    line-height: 1.3rem;
+}
+.card3{
+    width: 67rem;
+    height: 10rem;
+    margin-top: 2rem;
+    margin-left: 1rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    border: 2px solid rgb(195, 182, 182);
+}
+
+.card3 i{
+    font-size: x-large;
+    position: relative;
+    top: 1.9rem;
+    left: 0.2rem;
+}
+.card3 h4{
+    color: rgba(61, 215, 123, 0.895);
+}
+.card3 p{
+    margin-top: 1rem;
+    color:  rgba(255, 255, 255, 0.895);
+    font-weight: 500;
+    line-height: 1.3rem;
+}
+.card4{
+    width: 67rem;
+    height: 10rem;
+    margin-top: 2rem;
+    margin-left: 1rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    border: 2px solid rgb(195, 182, 182);
+}
+
+.card4 i{
+    font-size: x-large;
+    position: relative;
+    top: 1.9rem;
+    left: 0.2rem;
+}
+.card4 h4{
+    color: rgba(61, 215, 123, 0.895);
+}
+.card4 p{
+    margin-top: 1rem;
+    color:  rgba(255, 255, 255, 0.895);
+    font-weight: 500;
+    line-height: 1.3rem;
+}
+
+
+/* main content all user section */
+/* main content all user section */
+
+
+.all-users-section h2{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-top: 1rem;
+    margin-left: 2.2rem;
+    width: 7rem;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(196, 194, 224);
+    border-radius: 15px;
+    padding: 5px 2px ;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.users{
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.user1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    background-color: rgb(196, 194, 224);
+    height: 14.5rem;
+    width: 14rem;
+    border-radius: 3rem;
+}
+
+.user1 .pic{
+    height: 6.5rem;
+    width: 6.5rem;
+    margin: 1rem;
+    background: url("../../assets/g.jpeg");
+    background-size: cover;
+    border-radius: 50%;
+
+}
+
+.user1 h3{
+    font-size: 0.9rem;
+    color: rgba(18, 19, 18, 0.895);
+    margin-top: 1.3rem;
+}
+
+.user1 button{
+    cursor: pointer;
+    color: rgba(15, 14, 14, 0.895);
+    background-color: rgb(141, 135, 223);
+    padding: 0.4rem 0.7rem;
+    border-radius: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.7rem;
+    border-style: none;
+}
+
+.user1 button i{
+    border: 2px solid rgb(236, 232, 232);
+    border-radius: 3rem;
+}
+
+/* Main content craete post */
+/* Main content craete post */
+/* Main content craete post */
+
+.create-post h2{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 60rem;
+    width: 9rem;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(196, 194, 224);
+    border-radius: 15px;
+    padding: 3px 10px;
+    font-size: 20px;
+}
+
+.create-post textarea{
+    margin-left: 1.3rem;
+    width: 96%;
+    height: 15rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(196, 194, 224);
+    border-style: none;
+}
+
+.create-post button{
+    display: flex;
+    justify-self: flex-end;
+    cursor: pointer;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(196, 194, 224);
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    margin-top: 0.5rem;
+    margin-right: 1.3rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+    border-style: none;
+}
+
+/* My friends seaction */
+.friend-list h2{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 60rem;
+    width: 11rem;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(196, 194, 224);
+    border-radius: 15px;
+    padding: 3px 10px;
+    font-size: 20px;
+}
+
+
+.friends{
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.friend1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    background-color: rgb(222, 222, 222);
+    height: 14.5rem;
+    width: 14rem;
+    border-radius: 3rem;
+}
+
+.friend1 .pic{
+    height: 6.5rem;
+    width: 6.5rem;
+    margin: 1rem;
+    background: url("../../assets/g.jpeg");
+    background-size: cover;
+    border-radius: 50%;
+
+}
+
+.friend1 h3{
+    font-size: 0.9rem;
+    color: rgba(18, 19, 18, 0.895);
+    margin-top: 1.3rem;
+}
+
+.friend1 button{
+    cursor: pointer;
+    color: rgba(15, 14, 14, 0.895);
+    background-color: rgb(141, 135, 223);
+    padding: 0.4rem 0.7rem;
+    border-radius: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.7rem;
+    border-style: none;
+}
+
+.friend1 button i{
+    border: 2px solid rgb(236, 232, 232);
+    border-radius: 3rem;
+}
+
+
+
+/* My Mutuals seaction */
+.mutual-list h2{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 60rem;
+    width: 11rem;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(196, 194, 224);
+    border-radius: 15px;
+    padding: 3px 10px;
+    font-size: 20px;
+}
+
+
+.mutuals{
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.mutual1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    background-color: rgb(222, 222, 222);
+    height: 14.5rem;
+    width: 14rem;
+    border-radius: 3rem;
+}
+
+.mutual1 .pic{
+    height: 6.5rem;
+    width: 6.5rem;
+    margin: 1rem;
+    background: url("../../assets/g.jpeg");
+    background-size: cover;
+    border-radius: 50%;
+
+}
+
+.mutual1 h3{
+    font-size: 0.9rem;
+    color: rgba(18, 19, 18, 0.895);
+    margin-top: 1.3rem;
+}
+
+.mutual1 button{
+    cursor: pointer;
+    color: rgba(15, 14, 14, 0.895);
+    background-color: rgb(141, 135, 223);
+    padding: 0.4rem 0.7rem;
+    border-radius: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.7rem;
+    border-style: none;
+}
+
+.mutual1 button i{
+    border: 2px solid rgb(236, 232, 232);
+    border-radius: 3rem;
+}
+
+
+
+
+/* My suggestions seaction */
+.suggestion-list h2{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 60rem;
+    width: 11rem;
+    color: rgba(2, 20, 11, 0.895);
+    background-color: rgb(196, 194, 224);
+    border-radius: 15px;
+    padding: 3px 10px;
+    font-size: 20px;
+}
+
+
+.suggestions{
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.suggestion1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    background-color: rgb(222, 222, 222);
+    height: 14.5rem;
+    width: 14rem;
+    border-radius: 3rem;
+}
+
+.suggestion1 .pic{
+    height: 6.5rem;
+    width: 6.5rem;
+    margin: 1rem;
+    background: url("../../assets/g.jpeg");
+    background-size: cover;
+    border-radius: 50%;
+
+}
+
+.suggestion1 h3{
+    font-size: 0.9rem;
+    color: rgba(18, 19, 18, 0.895);
+    margin-top: 1.3rem;
+}
+
+.suggestion1 button{
+    cursor: pointer;
+    color: rgba(15, 14, 14, 0.895);
+    background-color: rgb(141, 135, 223);
+    padding: 0.4rem 0.7rem;
+    border-radius: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.7rem;
+    border-style: none;
+}
+
+.suggestion1 button i{
+    border: 2px solid rgb(236, 232, 232);
+    border-radius: 3rem;
 }

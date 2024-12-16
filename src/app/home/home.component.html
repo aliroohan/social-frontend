@@ -1,87 +1,165 @@
-<div class="homepage-container">
-  <div class="navbar">
-    <h1>MySocial</h1>
-    <p>{{ name }}</p>
-    <button (click)="logout()">Logout</button>
-  </div>
-
-  <div class="content">
-    <div class="sidebar">
-      <ul>
-        <li (click)="homeBtn()">Home</li>
-        <li (click)="Post()">Create Post</li>
-        <li (click)="friendsBtn()">Friends</li>
-        <li (click)="allUsersBtn()">All Users</li>
-        <li (click)="suggestFriendsBtn()">suggested-friends</li>
-      </ul>
-    </div>
-
-    <div *ngIf="postdiv" class="feed">
-      <div *ngFor="let post of this.posts" class="post">
-        <h3>{{ post.user_name }}</h3>
-        <p>{{ post.content }}</p>
+<div class="body">
+  <header>
+    <div class="top-header">
+      <!-- functions -->
+      <div class="left-part">
+        <button (click)="homeBtn()" class="btn">For You</button>
+        <button (click)="Post()" class="btn">Create Post</button>
+        <button (click)="allUsersBtn()" class="btn">Add Friend</button>
+        <button (click)="friendsBtn()" class="btn">My Friends</button>
+        <button (click)="suggestFriendsBtn()" class="btn">Suggestions</button>
+      </div>
+      <!-- logout -->
+      <div class="right-part">
+        <button (click)="logout()" class="btn">Logout</button>
       </div>
     </div>
+  </header>
 
-    <div *ngIf="createPosts" class="feed">
-      <mat-form-field class="post-text">
-        <mat-label>Post Content</mat-label>
-        <textarea matInput [(ngModel)]="postContent"></textarea>
-      </mat-form-field>
-      <button class="post-btn" (click)="createPost()">Post</button>
+  <div class="left-header">
+    <!-- pic -->
+    <div class="picture"></div>
+    <!-- details -->
+    <div class="details">
+      <h3>PERSONEL DETAILS</h3>
+      <div class="username">
+        Name:
+        <p>DANYAL &nbsp; MUSTAFA</p>
+      </div>
+      <div class="email">
+        Email:
+        <p>danyalmustafa424.com</p>
+      </div>
+      <div class="password">
+        Password:
+        <p>lkhkjk</p>
+      </div>
+
+      <div class="bio">
+        Bio:
+        <p>
+          Who's gonna Carry the <br />
+          Boats and the Logs..
+        </p>
+      </div>
     </div>
+  </div>
+  <div class="main-content">
+    <!-- which function is being used -->
 
-    <div *ngIf="displayFriends" class="feed">
-      <div class="friend">
-        <h3>Friends</h3>
-        <div *ngFor="let friend of this.friends" class="friend-card">
-          <h4>{{ friend.name }}</h4>
-          <button (click)="removeFriend(friend.id)">Remove Friend</button>
+    <div class="post-section">
+      <div *ngIf="postdiv" class="cards">
+        <h2>POSTS</h2>
+        <div *ngFor="let post of this.posts" class="card1">
+          <h4>{{ post.user_name }}</h4>
+          <p>{{ post.content }}.</p>
+          <i class="bx bx-heart"></i>
+          <i class="bx bx-message-rounded-dots"></i>
+          <i class="bx bx-tag-alt"></i>
         </div>
       </div>
     </div>
 
-    <div *ngIf="this.allUsersDiv" class="feed">
-      <div class="friend">
-        <h3>All Users</h3>
-        <div *ngFor="let user of this.allUsers; let i = 'index'" class="friend-card">
-          <h4>{{ user.name }}</h4>
+    <div *ngIf="createPosts" class="create-post">
+      <h2>Create Post</h2>
+      <textarea [(ngModel)]="postContent"> </textarea>
+
+      <button (click)="createPost()" type="button" id="Post">Post</button>
+    </div>
+
+    <div *ngIf="this.allUsersDiv" class="all-users-section">
+      <h2>All Users</h2>
+      <div class="users">
+        <div *ngFor="let user of this.allUsers" class="user1">
+          <div class="pic"></div>
+          <h3>{{ user.name }}</h3>
           <a (click)="seeMutuals(user.id)">{{
             user.mutualCount + " mutual friends"
           }}</a>
-          <button *ngIf="!isFriend(user.id)" (click)="addFriend(user.id)">
+          <button
+            *ngIf="!isFriend(user.id)"
+            (click)="addFriend(user.id)"
+            id="addFriend"
+          >
             Add Friend
+            <i class="bx bx-plus"></i>
           </button>
-          <button *ngIf="isFriend(user.id)" (click)="removeFriend(user.id)">
+          <button
+            *ngIf="isFriend(user.id)"
+            (click)="removeFriend(user.id)"
+            id="addFriend"
+          >
             Remove Friend
+            <i class="bx bx-minus"></i>
           </button>
         </div>
       </div>
+    </div>
 
-      <div *ngIf="this.mutualFriendsDiv" class="feed">
-        <h3>Mutual Friends of {{ selectedUserName }}</h3>
-        <div *ngFor="let friend of this.mutualFriends" class="friend-card">
-          <h4>{{ friend.name }}</h4>
-          <button *ngIf="!isFriend(friend.id)" (click)="addFriend(friend.id)">
+    <div *ngIf="this.mutualFriendsDiv" class="mutual-list">
+      <h2>Mutual friends</h2>
+      <div class="users">
+        <div *ngFor="let user of this.mutualFriends" class="user1">
+          <div class="pic"></div>
+          <h3>{{ user.name }}</h3>
+          <button
+            *ngIf="!isFriend(user.id)"
+            (click)="addFriend(user.id)"
+            id="addFriend"
+          >
             Add Friend
+            <i class="bx bx-plus"></i>
           </button>
-          <button *ngIf="isFriend(friend.id)" (click)="removeFriend(friend.id)">
+          <button
+            *ngIf="isFriend(user.id)"
+            (click)="removeFriend(user.id)"
+            id="addFriend"
+          >
             Remove Friend
+            <i class="bx bx-minus"></i>
           </button>
         </div>
+      </div>
+    </div>
 
-        <div *ngIf="this.suggested" class="feed">
-        <h3>Suggested Friends</h3>
-        <div *ngFor="let friend of this.suggestedFriends" class="friend-card">
-          <h4>{{ friend.name }}</h4>
-          <button *ngIf="!isFriend(friend.id)" (click)="addFriend(friend.id)">
-            Add Friend
-          </button>
-          <button *ngIf="isFriend(friend.id)" (click)="removeFriend(friend.id)">
+    <div *ngIf="this.displayFriends" class="friend-list">
+      <h2>My Friend List</h2>
+
+      <div *ngIf="displayFriends" class="friends">
+        <div *ngFor="let friend of this.friends" class="user1">
+          <div class="pic"></div>
+          <h3>{{ friend.name }}</h3>
+          <button (click)="removeFriend(friend.id)" id="addFriend">
             Remove Friend
+            <i class="bx bx-minus-circle"></i>
           </button>
         </div>
-        <div class="right-sidebar"></div>
+      </div>
+    </div>
+    <div *ngIf="this.suggested" class="suggestion-list">
+      <h2>Suggestion</h2>
+
+      <div class="suggestions">
+        <div *ngFor="let friend of this.suggestedFriends" class="user1">
+          <div class="pic"></div>
+          <h3>{{ friend.name }}</h3>
+          <button
+            *ngIf="!isFriend(friend.id)"
+            (click)="addFriend(friend.id)"
+            id="addFriend"
+          >
+            Add Friend
+            <i class="bx bx-plus-circle"></i>
+          </button>
+          <button
+            *ngIf="isFriend(friend.id)"
+            (click)="removeFriend(friend.id)"
+            id="addFriend"
+          >
+            Remove Friend
+            <i class="bx bx-minus-circle"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
