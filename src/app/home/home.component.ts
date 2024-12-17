@@ -52,6 +52,8 @@ export class HomeComponent {
   allUsersDiv: boolean = false;
   mutualFriendsDiv: boolean = false;
   suggested: boolean = false;
+  searchDiv: boolean = false;
+  searchQuery: string = '';
   posts: post[] = [];
   friends: user[] = [];
   allUsers: user[] = [];
@@ -59,6 +61,7 @@ export class HomeComponent {
   selectedUserName: string = "";
   suggestedFriends: user[] = [];
   friendsIds: number[] = [];
+  searchResults: user[] = [];
 
   constructor(
     public login: LoginDetailService,
@@ -122,6 +125,7 @@ export class HomeComponent {
     } catch (error) {
       console.log(error);
     }
+    this.searchResults = this.allUsers;
   }
 
   async getMutalFriendsCount(id: number): Promise<number> {
@@ -239,7 +243,7 @@ export class HomeComponent {
   } 
 
   Post() {
-
+    
     this.postdiv = false;
     this.displayFriends = false;
     this.createPosts = true;
@@ -285,6 +289,10 @@ export class HomeComponent {
     this.mutualFriendsDiv = false;
     this.suggested = true;
     this.loadSuggestedFriends();
+  }
+
+  search() {
+    this.searchResults = this.allUsers.filter(user => user.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
   }
 
   async loadSuggestedFriends() {

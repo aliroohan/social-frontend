@@ -24,17 +24,12 @@
       <h3>PERSONEL DETAILS</h3>
       <div class="username">
         Name:
-        <p>{{ this.name}}</p>
+        <p>{{ this.name }}</p>
       </div>
       <div class="email">
         Email:
-        <p>{{this.email}}</p>
+        <p>{{ this.email }}</p>
       </div>
-      <div class="password">
-        Password:
-        <p>{{this.password}}</p>
-      </div>
-
       <div class="bio">
         Bio:
         <p>
@@ -69,8 +64,14 @@
 
     <div *ngIf="this.allUsersDiv" class="all-users-section">
       <h2>All Users</h2>
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Search friends..."
+        (keyup)="search()"
+      />
       <div class="users">
-        <div *ngFor="let user of this.allUsers" class="user1">
+        <div *ngFor="let user of this.searchResults" class="user1">
           <div class="pic"></div>
           <h3>{{ user.name }}</h3>
           <a (click)="seeMutuals(user.id)">{{
