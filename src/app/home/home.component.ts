@@ -26,6 +26,7 @@ class user {
   email: string = '';
   password: string = '';
   mutualCount: number = 0;
+  bio: string = '';
 }
 @Component({
   selector: 'app-home',
@@ -81,12 +82,6 @@ export class HomeComponent {
       const friendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/friends/${this.login.user_id}`));
       for (const friend of friendsResponse) {
         this.friends.push(friend);
-        // try {
-        //   const postsResponse = await lastValueFrom(this.http.get<post[]>(`${apiAddress}/posts/?user_id=${friend.id}`));
-        //   this.posts.push(...postsResponse);
-        // } catch (error) {
-        //   console.log(error);
-        // }
       }
     } catch (error) {
       console.log(error);
@@ -107,13 +102,6 @@ export class HomeComponent {
       console.log('Fetching posts for user IDs:', this.friendsIds);
       const friendsPostsResponse = await lastValueFrom(this.http.post<post[]>(`${apiAddress}/post/`,this.friendsIds, { headers}));
       this.posts.push(...friendsPostsResponse);
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      const userPostsResponse = await lastValueFrom(this.http.get<post[]>(`${apiAddress}/posts/?user_id=${this.login.user_id}`));
-      this.posts.push(...userPostsResponse);
     } catch (error) {
       console.log(error);
     }
@@ -251,6 +239,7 @@ export class HomeComponent {
   } 
 
   Post() {
+
     this.postdiv = false;
     this.displayFriends = false;
     this.createPosts = true;
