@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Observable, lastValueFrom } from 'rxjs';
 class post {
   user_id: number = 0;
@@ -57,6 +57,7 @@ export class HomeComponent {
   mutualFriends: user[] = [];
   selectedUserName: string = "";
   suggestedFriends: user[] = [];
+  friendsIds: number[] = [];
 
   constructor(
     public login: LoginDetailService,
@@ -80,13 +81,32 @@ export class HomeComponent {
       const friendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/friends/${this.login.user_id}`));
       for (const friend of friendsResponse) {
         this.friends.push(friend);
-        try {
-          const postsResponse = await lastValueFrom(this.http.get<post[]>(`${apiAddress}/posts/?user_id=${friend.id}`));
-          this.posts.push(...postsResponse);
-        } catch (error) {
-          console.log(error);
-        }
+        // try {
+        //   const postsResponse = await lastValueFrom(this.http.get<post[]>(`${apiAddress}/posts/?user_id=${friend.id}`));
+        //   this.posts.push(...postsResponse);
+        // } catch (error) {
+        //   console.log(error);
+        // }
       }
+    } catch (error) {
+      console.log(error);
+    }
+    this.friendsIds.push(this.login.user_id);
+    for (const friend of this.friends) {
+      this.friendsIds.push(friend.id);
+    }
+    let params = new HttpParams();
+    this.friendsIds.forEach(id => {
+      params = params.append('user_ids', id.toString());
+    });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    try {
+      console.log('Fetching posts for user IDs:', this.friendsIds);
+      const friendsPostsResponse = await lastValueFrom(this.http.post<post[]>(`${apiAddress}/post/`,this.friendsIds, { headers}));
+      this.posts.push(...friendsPostsResponse);
     } catch (error) {
       console.log(error);
     }
