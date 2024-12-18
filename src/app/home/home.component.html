@@ -50,7 +50,8 @@
       <div *ngIf="postdiv" class="cards">
         <h2>POSTS</h2>
         <div *ngFor="let post of this.posts" class="card1">
-          <h4>{{ post.user_name }}</h4>
+          <h4>{{ post.user_name}}</h4>
+          <h6>{{post.time.slice(0,post.time.length - 13)}}</h6>
           <p>{{ post.content }}.</p>
           <i class="bx bx-heart"></i>
           <i class="bx bx-message-rounded-dots"></i>

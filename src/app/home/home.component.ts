@@ -9,6 +9,7 @@ class post {
   user_id: number = 0;
   user_name: string = '';
   content: string = '';
+  time: string = '';
   constructor(user_id: number, user_name: string, content: string) {
     this.user_id = user_id;
     this.user_name = user_name;
