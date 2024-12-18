@@ -38,7 +38,7 @@
         </div>
         <div *ngIf="bioEdit">
           <textarea [(ngModel)]="this.bio" id="bio"> </textarea>
-          <button (click)="submitBio()" >Submit</button>
+          <button (click)="submitBio()">Submit</button>
         </div>
       </div>
     </div>
@@ -68,12 +68,14 @@
 
     <div *ngIf="this.allUsersDiv" class="all-users-section">
       <h2>All Users</h2>
-      <input
-        type="text"
-        [(ngModel)]="searchQuery"
-        placeholder="Search friends..."
-        (keyup)="search()"
-      />
+      <div class="search">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          placeholder="Search friends..."
+          (keyup)="search()"
+        />
+      </div>
       <div class="users">
         <div *ngFor="let user of this.searchResults" class="user1">
           <div class="pic"></div>

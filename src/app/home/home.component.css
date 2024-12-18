@@ -473,68 +473,27 @@
     margin-left: 6.8rem;
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .top-header {
-        flex-direction: column;
-        width: 100%;
-        height: auto;
-    }
-
-    .main-content {
-        width: 100%;
-        height: auto;
-        top: 6rem; /* Adjusted for header */
-    }
-
-    .left-header {
-        width: 100%;
-        height: auto;
-        position: relative; /* Changed to relative for mobile */
-    }
-
-    .left-header h3 {
-        margin-left: 10px; /* Adjusted for smaller screens */
-    }
-
-    .user1, .friend1, .suggestion1 {
-        width: 100%; /* Full width on smaller screens */
-        height: auto; /* Auto height */
-    }
-
-    .user1 h3, .friend1 h3, .suggestion1 h3 {
-        font-size: 1rem; /* Adjust font size */
-    }
-
-    .card1 {
-        width: 100%; /* Full width for cards */
-        height: auto; /* Auto height */
-    }
-
-    .create-post textarea {
-        width: 100%; /* Full width for textarea */
-    }
-
-    .top-header .btn {
-        width: 100%; /* Full width for buttons */
-        margin: 0.5rem 0; /* Margin adjustments */
-    }
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    background-color: rgba(196, 194, 224, 0);
+    border-radius: 15px;
+    padding: 3px 10px;
+    font-size: 20px;
+    
 }
 
-@media (max-width: 480px) {
-    .left-header {
-        height: auto; /* Auto height for very small screens */
-    }
-
-    .left-header h3 {
-        font-size: 1rem; /* Smaller font size */
-    }
-
-    .top-header .btn {
-        font-size: 14px; /* Smaller font size for buttons */
-    }
-
-    .post-section h2, .all-users-section h2, .friend-list h2, .suggestion-list h2 {
-        font-size: 1.2rem; /* Adjust heading sizes */
-    }
+.search input {
+    margin-left: 1.3rem;
+    width: 96%;
+    height: 2rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.895);
+    background-color: rgba(196, 194, 224, 0.09);
+    border-style: 2px solid rgba(255, 255, 255, 0.799);
+    border-radius: 15px;
 }
