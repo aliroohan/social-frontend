@@ -34,7 +34,7 @@
     position: absolute;
     height: 10rem;
     width: 10rem;
-    background: url('../../assets/g.jpeg');
+    background: url('../../assets/tommy.jpg');
     background-size: cover;
     left: 4rem;
     top: 2rem;
@@ -234,7 +234,7 @@
     height: 6.5rem;
     width: 6.5rem;
     margin: 1rem;
-    background: url("../../assets/g.jpeg");
+    background: url("../../assets/pic.jpg");
     background-size: cover;
     border-radius: 50%;
 }
@@ -343,7 +343,7 @@
     height: 6.5rem;
     width: 6.5rem;
     margin: 1rem;
-    background: url("../../assets/g.jpeg");
+    background: url("../../assets/pic.jpg");
     background-size: cover;
     border-radius: 50%;
 }
@@ -409,7 +409,7 @@
     height: 6.5rem;
     width: 6.5rem;
     margin: 1rem;
-    background: url("../../assets/g.jpeg");
+    background: url("../../assets/pic.jpg");
     background-size: cover;
     border-radius: 50%;
 }
@@ -455,6 +455,11 @@
     background-color: transparent;
     color: white;
     padding: 2px;
+}
+
+.bio p{
+    display: flex;
+    flex-wrap: wrap;
 }
 .bio button{
     background-color: #6175aa;
