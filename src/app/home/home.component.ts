@@ -297,6 +297,16 @@ export class HomeComponent {
 
   submitBio() {
     this.bioEdit = false;
+    this.http.post(apiAddress + '/bio/?user_id=' + this.login.user_id + '&bio=' + this.bio, {}).subscribe(
+      (response) => {
+        console.log(response);
+        alert('Bio updated successfully');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    localStorage.setItem('bio', this.bio);
   }
   async loadSuggestedFriends() {
     try {
