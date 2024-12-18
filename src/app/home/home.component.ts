@@ -1,12 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { Component } from '@angular/core';
 import { LoginDetailService } from '../login-detail.service';
-import { MatFormField} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { HttpClient, HttpClientModule,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Observable, lastValueFrom } from 'rxjs';
 class post {
@@ -31,11 +27,8 @@ class user {
 @Component({
   selector: 'app-home',
   imports: [
-    MatCardModule,
     CommonModule,
     FormsModule,
-    MatInputModule,
-    MatButtonModule,
     HttpClientModule,
   ],
   templateUrl: './home.component.html',
@@ -45,6 +38,7 @@ export class HomeComponent {
   name: string = '';
   email: string = '';
   password: string = '';
+  bio: string = '';
   postContent: string = '';
   postdiv: boolean = true;
   displayFriends: boolean = false;
@@ -53,6 +47,7 @@ export class HomeComponent {
   mutualFriendsDiv: boolean = false;
   suggested: boolean = false;
   searchDiv: boolean = false;
+  bioEdit: boolean = false;
   searchQuery: string = '';
   posts: post[] = [];
   friends: user[] = [];
@@ -73,7 +68,7 @@ export class HomeComponent {
     }
     this.name = login.user_name;
     this.email = login.email;
-    this.password = login.password;
+    this.bio = login.bio;
 
     this.loadFriendsAndPosts();
     this.loadUserDetails();
@@ -295,6 +290,14 @@ export class HomeComponent {
     this.searchResults = this.allUsers.filter(user => user.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
   }
 
+
+  edit() {
+    this.bioEdit = true;
+  }
+
+  submitBio() {
+    this.bioEdit = false;
+  }
   async loadSuggestedFriends() {
     try {
       const suggestedFriendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/suggested-friends/${this.login.user_id}`));

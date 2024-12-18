@@ -433,6 +433,41 @@
     border-style: none;
 }
 
+.edit {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.895);
+    
+    margin-left: 13rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: .8rem;
+    border-style: none;
+}
+
+.edit:hover {
+    color: rgba(255, 255, 255, 0.895);
+    text-decoration: underline;
+}
+
+#bio{
+    width: 15rem;
+    background-color: transparent;
+    color: white;
+    padding: 2px;
+}
+.bio button{
+    background-color: #6175aa;
+    width: 4rem;
+    height: 1.5rem;
+    font-weight: 450;
+    color: #060b18;
+}
+.buttons{
+    margin-top: 0.5rem;
+    margin-left: 6.8rem;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .top-header {

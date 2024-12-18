@@ -32,10 +32,14 @@
       </div>
       <div class="bio">
         Bio:
-        <p>
-          Who's gonna Carry the <br />
-          Boats and the Logs..
-        </p>
+        <div *ngIf="!bioEdit">
+          <p>{{ this.bio }}</p>
+          <a class="edit" (click)="edit()">Edit</a>
+        </div>
+        <div *ngIf="bioEdit">
+          <textarea [(ngModel)]="this.bio" id="bio"> </textarea>
+          <button (click)="submitBio()" >Submit</button>
+        </div>
       </div>
     </div>
   </div>
