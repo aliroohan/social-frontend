@@ -191,6 +191,7 @@ export class HomeComponent {
           console.log(error);
         }
       );
+      this.loadFriendsAndPosts();
   }
 
   removeFriend(id: number) {

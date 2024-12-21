@@ -53,17 +53,20 @@
           <h4>{{ post.user_name }}</h4>
           <h6>{{ post.time.slice(0, post.time.length - 13) }}</h6>
           <p>{{ post.content }}.</p>
-            <i (click)="toggleLike(post.id)" 
-             [ngClass]="userliked(post.id) ? 'bx bxs-heart' : 'bx bx-heart'">
-             {{ post.likesCount }}
-            </i>
-            
+          <i
+            (click)="toggleLike(post.id)"
+            [ngClass]="userliked(post.id) ? 'bx bxs-heart' : 'bx bx-heart'"
+            >{{ post.likesCount }}
+          </i>
+
           <i class="bx bx-message-rounded-dots"></i>
-          <i class="bx bx-tag-alt"></i>
 
           <!-- Display liked usernames -->
-          <div *ngIf="getLikedUsernames(post.id).length > 0" class="liked-users">
-            <p>Liked by: {{ getLikedUsernames(post.id).join(', ') }}</p>
+          <div
+            *ngIf="getLikedUsernames(post.id).length > 0"
+            class="liked-users"
+          >
+            <p>Liked by: {{ getLikedUsernames(post.id).join(", ") }}</p>
           </div>
         </div>
       </div>
