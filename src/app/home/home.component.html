@@ -53,20 +53,31 @@
           <h4>{{ post.user_name }}</h4>
           <h6>{{ post.time.slice(0, post.time.length - 13) }}</h6>
           <p>{{ post.content }}.</p>
-          <i
-            (click)="toggleLike(post.id)"
-            [ngClass]="userliked(post.id) ? 'bx bxs-heart' : 'bx bx-heart'"
-            >{{ post.likesCount }}
-          </i>
+          <div class="like-comment">
+            <i
+              (click)="toggleLike(post.id)"
+              [ngClass]="userliked(post.id) ? 'bx bxs-heart' : 'bx bx-heart'"
+            >
+            </i
+            ><a (click)="show(post.id)">{{ post.likesCount }}</a>
 
-          <i class="bx bx-message-rounded-dots"></i>
-
+            <i (click)="post.showComments = !post.showComments" class="bx bx-message-rounded-dots"></i>
+          </div>
           <!-- Display liked usernames -->
-          <div
-            *ngIf="getLikedUsernames(post.id).length > 0"
+          <div 
+            *ngIf="getLikedUsernames(post.id).length > 0 && post.showLikes"
             class="liked-users"
           >
             <p>Liked by: {{ getLikedUsernames(post.id).join(", ") }}</p>
+          </div>
+          <div *ngIf="post.showComments" class="comments">
+            <h3>Comments</h3>
+            <textarea [(ngModel)]="this.comment" id="comment"></textarea>
+            <button (click)="commentPost(post.id)">Comment</button>
+            <div *ngFor="let comment of post.comments" class="comment">
+              <h4>{{ comment.name }}</h4>
+              <p>{{ comment.comment }}</p>
+            </div>
           </div>
         </div>
       </div>

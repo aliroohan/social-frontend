@@ -174,10 +174,6 @@
     border: 2px solid rgb(195, 182, 182);
 }
 
-.liked-users {
-    margin-top: 10px;
-    padding-top: 10px;
-}
 
 .card1 i {
     font-size: x-large;
@@ -187,6 +183,18 @@
     left: 0.2rem;
 }
 
+.like-comment {
+    display: flex;
+    
+}
+
+.card1 a {
+    color: rgba(255, 255, 255, 0.895);
+    font-weight: 500;
+    text-decoration: none;
+    padding-top: 32px;
+    padding-left: 5px;
+}
 .card1 h4 {
     color: rgba(61, 215, 123, 0.895);
 }

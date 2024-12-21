@@ -10,14 +10,25 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Observable, lastValueFrom } from 'rxjs';
+
+class Comment {
+  name: string = '';
+  comment: string = '';
+}
+
 class post {
   id: number = 0;
   user_id: number = 0;
   user_name: string = '';
   content: string = '';
   time: string = '';
+  showLikes: boolean = false;
+  showComments: boolean = false;
   likesCount: number = 0;
+  commentsCount: number = 0;
   likes: string[] = [];
+  comments: Comment[] = [];
+
   constructor(user_id: number, user_name: string, content: string) {
     this.user_id = user_id;
     this.user_name = user_name;
@@ -45,6 +56,7 @@ export class HomeComponent {
   password: string = '';
   bio: string = '';
   postContent: string = '';
+  comment: string = '';
   postdiv: boolean = true;
   displayFriends: boolean = false;
   createPosts: boolean = false;
@@ -113,7 +125,7 @@ export class HomeComponent {
     } catch (error) {
       console.log(error);
     }
-
+    
     console.log('Posts:', this.posts);
 
     try {
@@ -403,5 +415,35 @@ export class HomeComponent {
           }
         );
     }
+  }
+
+  show(postId: number) {
+    const post = this.posts.find((p) => p.id === postId);
+    if (post) {
+      post.showLikes = !post.showLikes;
+    }
+  }
+
+  commentPost(postId: number) {
+    const post = this.posts.find((p) => p.id === postId);
+    if (post) {
+      post.comments.push({ name: this.login.user_name, comment: this.comment });
+      post.commentsCount++;
+      this.updatePostComments(postId, post.comments);
+      this.comment = '';
+    }
+  }
+
+  private updatePostComments(postId: number, comments: Comment[]) {
+    this.http
+      .post(`${apiAddress}/comment/?user_id=${this.login.user_id}&post_id=${postId}&comment=${this.comment}`, {})
+      .subscribe(
+        (response) => {
+          console.log('Comment added successfully', response);
+        },
+        (error) => {
+          console.log('Error adding comment', error);
+        }
+      );
   }
 }
