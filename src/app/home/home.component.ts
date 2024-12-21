@@ -3,13 +3,21 @@ import { Component } from '@angular/core';
 import { LoginDetailService } from '../login-detail.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient, HttpClientModule,HttpHeaders,HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 import { Observable, lastValueFrom } from 'rxjs';
 class post {
+  id: number = 0;
   user_id: number = 0;
   user_name: string = '';
   content: string = '';
   time: string = '';
+  likesCount: number = 0;
+  likes: string[] = [];
   constructor(user_id: number, user_name: string, content: string) {
     this.user_id = user_id;
     this.user_name = user_name;
@@ -27,11 +35,7 @@ class user {
 }
 @Component({
   selector: 'app-home',
-  imports: [
-    CommonModule,
-    FormsModule,
-    HttpClientModule,
-  ],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
@@ -54,7 +58,7 @@ export class HomeComponent {
   friends: user[] = [];
   allUsers: user[] = [];
   mutualFriends: user[] = [];
-  selectedUserName: string = "";
+  selectedUserName: string = '';
   suggestedFriends: user[] = [];
   friendsIds: number[] = [];
   searchResults: user[] = [];
@@ -62,7 +66,7 @@ export class HomeComponent {
   constructor(
     public login: LoginDetailService,
     private http: HttpClient,
-    private router: Router, 
+    private router: Router
   ) {
     if (this.login.user_id == 0 || this.login.user_name == '') {
       this.router.navigate(['/login']);
@@ -73,12 +77,13 @@ export class HomeComponent {
 
     this.loadFriendsAndPosts();
     this.loadUserDetails();
-    
   }
 
   async loadFriendsAndPosts() {
     try {
-      const friendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/friends/${this.login.user_id}`));
+      const friendsResponse = await lastValueFrom(
+        this.http.get<user[]>(`${apiAddress}/friends/${this.login.user_id}`)
+      );
       for (const friend of friendsResponse) {
         this.friends.push(friend);
       }
@@ -90,23 +95,33 @@ export class HomeComponent {
       this.friendsIds.push(friend.id);
     }
     let params = new HttpParams();
-    this.friendsIds.forEach(id => {
+    this.friendsIds.forEach((id) => {
       params = params.append('user_ids', id.toString());
     });
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
 
     try {
       console.log('Fetching posts for user IDs:', this.friendsIds);
-      const friendsPostsResponse = await lastValueFrom(this.http.post<post[]>(`${apiAddress}/post/`,this.friendsIds, { headers}));
+      const friendsPostsResponse = await lastValueFrom(
+        this.http.post<post[]>(`${apiAddress}/post/`, this.friendsIds, {
+          headers,
+        })
+      );
       this.posts.push(...friendsPostsResponse);
     } catch (error) {
       console.log(error);
     }
 
+    console.log('Posts:', this.posts);
+
     try {
-      const suggestedFriendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/suggested-friends/${this.login.user_id}`));
+      const suggestedFriendsResponse = await lastValueFrom(
+        this.http.get<user[]>(
+          `${apiAddress}/suggested-friends/${this.login.user_id}`
+        )
+      );
       this.suggestedFriends = suggestedFriendsResponse;
       console.log(this.suggestedFriends);
     } catch (error) {
@@ -116,7 +131,9 @@ export class HomeComponent {
 
   async loadUserDetails() {
     try {
-      const usersResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/users/?id=${this.login.user_id}`));
+      const usersResponse = await lastValueFrom(
+        this.http.get<user[]>(`${apiAddress}/users/?id=${this.login.user_id}`)
+      );
       this.allUsers = usersResponse;
     } catch (error) {
       console.log(error);
@@ -126,7 +143,11 @@ export class HomeComponent {
 
   async getMutalFriendsCount(id: number): Promise<number> {
     try {
-      const response = await lastValueFrom(this.http.get<number>(`${apiAddress}/mutual-count/${this.login.user_id}/${id}`));
+      const response = await lastValueFrom(
+        this.http.get<number>(
+          `${apiAddress}/mutual-count/${this.login.user_id}/${id}`
+        )
+      );
       console.log(response);
       return response;
     } catch (error) {
@@ -200,7 +221,6 @@ export class HomeComponent {
           console.log(error);
         }
       );
-      
   }
 
   isFriend(id: number) {
@@ -215,36 +235,38 @@ export class HomeComponent {
     this.allUsersDiv = false;
     this.suggested = false;
     this.mutualFriendsDiv = true;
-    this.selectedUserName = this.allUsers.find(user => user.id === id)?.name || '';
+    this.selectedUserName =
+      this.allUsers.find((user) => user.id === id)?.name || '';
   }
 
   async loadMutualFriends(id: number) {
     try {
-      const response = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/mutual-friends/${this.login.user_id}/${id}`));
+      const response = await lastValueFrom(
+        this.http.get<user[]>(
+          `${apiAddress}/mutual-friends/${this.login.user_id}/${id}`
+        )
+      );
       this.mutualFriends = response;
       console.log(this.mutualFriends);
-      
     } catch (error) {
       console.log(error);
     }
   }
 
-  
   logout() {
     this.login.user_id = 0;
     this.login.user_name = '';
     localStorage.removeItem('user_id');
     localStorage.removeItem('user_name');
     this.router.navigate(['/login']);
-  } 
+  }
 
   Post() {
-    
     this.postdiv = false;
     this.displayFriends = false;
     this.createPosts = true;
     this.allUsersDiv = false;
-    this.mutualFriendsDiv = false;  
+    this.mutualFriendsDiv = false;
     this.suggested = false;
   }
 
@@ -271,7 +293,7 @@ export class HomeComponent {
     this.displayFriends = false;
     this.createPosts = false;
     this.allUsersDiv = true;
-    this.mutualFriendsDiv = false;  
+    this.mutualFriendsDiv = false;
     this.suggested = false;
     this.allUsers = [];
     this.loadUserDetails();
@@ -288,9 +310,10 @@ export class HomeComponent {
   }
 
   search() {
-    this.searchResults = this.allUsers.filter(user => user.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    this.searchResults = this.allUsers.filter((user) =>
+      user.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
   }
-
 
   edit() {
     this.bioEdit = true;
@@ -298,24 +321,86 @@ export class HomeComponent {
 
   submitBio() {
     this.bioEdit = false;
-    this.http.post(apiAddress + '/bio/?user_id=' + this.login.user_id + '&bio=' + this.bio, {}).subscribe(
-      (response) => {
-        console.log(response);
-        alert('Bio updated successfully');
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.http
+      .post(
+        apiAddress + '/bio/?user_id=' + this.login.user_id + '&bio=' + this.bio,
+        {}
+      )
+      .subscribe(
+        (response) => {
+          console.log(response);
+          alert('Bio updated successfully');
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     localStorage.setItem('bio', this.bio);
   }
   async loadSuggestedFriends() {
     try {
-      const suggestedFriendsResponse = await lastValueFrom(this.http.get<user[]>(`${apiAddress}/suggested-friends/${this.login.user_id}`));
+      const suggestedFriendsResponse = await lastValueFrom(
+        this.http.get<user[]>(
+          `${apiAddress}/suggested-friends/${this.login.user_id}`
+        )
+      );
       this.suggestedFriends = suggestedFriendsResponse;
       console.log(this.suggestedFriends);
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  userliked(postId: number) {
+    const post = this.posts.find((p) => p.id === postId);
+    return post ? post.likes.includes(this.login.user_name) : false;
+  }
+
+  getLikedUsernames(postId: number): string[] {
+    const post = this.posts.find((p) => p.id === postId);
+    return post ? post.likes : [];
+  }
+
+  toggleLike(postId: number) {
+    const post = this.posts.find((p) => p.id === postId);
+    if (post) {
+      const userIndex = post.likes.indexOf(this.login.user_name);
+      if (userIndex === -1) {
+        
+        post.likes.push(this.login.user_name);
+        post.likesCount++;
+      } else {
+        
+        post.likes.splice(userIndex, 1);
+        post.likesCount--;
+      }
+      this.updatePostLikes(postId, post.likes);
+    }
+  }
+
+  private updatePostLikes(postId: number, likes: string[]) {
+    if (this.userliked(postId)) {
+      this.http
+        .post(`${apiAddress}/like/${this.login.user_id}/${postId}`, {})
+        .subscribe(
+          (response) => {
+            console.log('Likes updated successfully', response);
+          },
+          (error) => {
+            console.log('Error updating likes', error);
+          }
+        );
+    } else {
+      this.http
+        .delete(`${apiAddress}/like/${this.login.user_id}/${postId}`)
+        .subscribe(
+          (response) => {
+            console.log('Likes updated successfully', response);
+          },
+          (error) => {
+            console.log('Error updating likes', error);
+          }
+        );
     }
   }
 }
